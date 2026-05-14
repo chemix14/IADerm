@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permisos y características de hardware necesarias para capturar en RAW -->
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.raw" android:required="true" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Hardware features -->
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,15 +19,65 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IADerm">
+
+        <!-- ========================================= -->
+        <!-- Onboarding: Entry point for new users     -->
+        <!-- ========================================= -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".OnboardingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IADerm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- ========================================= -->
+        <!-- Home Dashboard                            -->
+        <!-- ========================================= -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+
+        <!-- ========================================= -->
+        <!-- Capture: Force light theme for better     -->
+        <!-- facial illumination during camera use     -->
+        <!-- ========================================= -->
+        <activity
+            android:name=".CaptureActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.IADerm.Capture" />
+
+        <activity
+            android:name=".TriggersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+
+        <!-- ========================================= -->
+        <!-- Results                                   -->
+        <!-- ========================================= -->
+        <activity
+            android:name=".ResultsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+
+        <!-- FileProvider for sharing PDF reports -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+    </application>
 </manifest>

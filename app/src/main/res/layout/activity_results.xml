@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ================================================== -->
+<!-- ResultsActivity Layout — Analysis Results          -->
+<!-- Heatmap, severity score, education, recommendations-->
+<!-- ================================================== -->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_revert"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_back"
+                app:tint="@color/on_background" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/results_title"
+                android:textAppearance="@style/TextAppearance.IADerm.Title"
+                android:textColor="@color/on_background"
+                android:gravity="center" />
+
+            <ImageButton
+                android:id="@+id/btnSave"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_save"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/results_save"
+                app:tint="@color/on_background" />
+        </LinearLayout>
+
+        <!-- Top 3 Predictions Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card.Outlined"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posibles Diagnósticos"
+                    android:textAppearance="@style/TextAppearance.IADerm.Title"
+                    android:textColor="@color/on_surface"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:drawablePadding="8dp" />
+
+                <TextView
+                    android:id="@+id/tvTop3List"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                    android:textColor="@color/on_surface_variant"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.4"
+                    tools:text="1. Acné: 85%\n2. Rosácea: 10%\n3. Melasma: 5%" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Score Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvDiagnosisLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Diagnóstico"
+                        android:textAppearance="@style/TextAppearance.IADerm.Title"
+                        android:textColor="@color/on_surface" />
+
+                    <!-- Severity Chip -->
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSeverity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Leve"
+                        style="@style/Widget.IADerm.Chip.Severity.Mild" />
+                </LinearLayout>
+
+                <!-- Big Score Number -->
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.IADerm.Display"
+                    android:textColor="@color/primary"
+                    android:layout_marginTop="8dp"
+                    tools:text="42/100" />
+
+                <!-- Score Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progressScore"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="@color/primary"
+                    android:progressBackgroundTint="@color/surface_variant"
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Education Section: "What does this mean?" -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card.Outlined"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/results_what_means"
+                    android:textAppearance="@style/TextAppearance.IADerm.Title"
+                    android:textColor="@color/on_surface"
+                    android:drawableStart="@android:drawable/ic_menu_info_details"
+                    android:drawablePadding="8dp" />
+
+                <TextView
+                    android:id="@+id/tvResultDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                    android:textColor="@color/on_surface_variant"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.4"
+                    tools:text="@string/results_desc_mild" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Recommendations Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card.Outlined"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/results_recommendations"
+                    android:textAppearance="@style/TextAppearance.IADerm.Title"
+                    android:textColor="@color/on_surface" />
+
+                <TextView
+                    android:id="@+id/tvRecommendationList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                    android:textColor="@color/on_surface"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.4"
+                    tools:text="- Evitar el sol directo\n- Consultar al dermatólogo" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBookAppointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/results_book_appointment"
+                    style="@style/Widget.IADerm.Button.Outlined"
+                    android:layout_marginTop="16dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Disclaimer Footer -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer_short"
+            android:textAppearance="@style/TextAppearance.IADerm.Disclaimer"
+            android:gravity="center"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

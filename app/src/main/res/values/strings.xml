@@ -1,3 +1,209 @@
 <resources>
     <string name="app_name">IADerm</string>
+    <string name="app_tagline">Análisis inteligente de piel</string>
+
+    <!-- ========================================= -->
+    <!-- Navigation                                -->
+    <!-- ========================================= -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_history">Historial</string>
+    <string name="nav_capture">Analizar</string>
+    <string name="nav_triggers">Triggers</string>
+    <string name="nav_profile">Perfil</string>
+
+    <!-- Settings -->
+    <string name="cd_settings">Configuración</string>
+    <string name="action_save">Guardar</string>
+    <string name="error_invalid_input">Entrada no válida</string>
+
+    <!-- Triggers -->
+    <string name="title_triggers">Registrar Desencadenante</string>
+    <string name="triggers_type_label">¿Qué deseas registrar?</string>
+    <string name="trigger_food">🍎 Alimentación</string>
+    <string name="trigger_stress">🧠 Estrés / Ansiedad</string>
+    <string name="trigger_sleep">💤 Falta de sueño</string>
+    <string name="trigger_weather">☀️ Clima extremo</string>
+    <string name="trigger_skincare">🧴 Producto / Rutina</string>
+    <string name="triggers_severity_label">Intensidad</string>
+    <string name="triggers_notes_label">Notas (Opcional)</string>
+    <string name="triggers_notes_hint">Ej: Comí lácteos, probé nueva crema...</string>
+
+    <!-- ========================================= -->
+    <!-- Home Screen                               -->
+    <!-- ========================================= -->
+    <string name="home_greeting">Buenos días</string>
+    <string name="home_greeting_afternoon">Buenas tardes</string>
+    <string name="home_greeting_evening">Buenas noches</string>
+    <string name="home_skin_today">Tu piel hoy</string>
+    <string name="home_last_analysis">Último análisis</string>
+    <string name="home_days_ago">hace %1$d días</string>
+    <string name="home_view_details">Ver detalles</string>
+    <string name="home_no_analysis">Aún no has realizado tu primer análisis</string>
+    <string name="home_start_first">Comenzar primer análisis</string>
+    <string name="home_quick_actions">Acciones rápidas</string>
+    <string name="home_tip_title">💡 Tip del día</string>
+    <string name="home_analyze_btn">Analizar mi piel</string>
+    <string name="home_tip_content">El protector solar SPF 30+ reduce la frecuencia de brotes de rojez hasta un 40%</string>
+    <string name="home_score_label">Índice de rojez: %1$d/100</string>
+    <string name="home_last_analysis_summary">Hace %1$d días — %2$s</string>
+
+    <!-- ========================================= -->
+    <!-- Onboarding                                -->
+    <!-- ========================================= -->
+    <string name="onboarding_skip">Saltar</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_start">Comenzar</string>
+
+    <string name="onboarding_title_1">Analiza tu piel con IA</string>
+    <string name="onboarding_desc_1">Toma una foto de tu rostro y nuestra inteligencia artificial analizará signos de rojez facial de forma segura y privada.</string>
+
+    <string name="onboarding_title_2">Seguimiento inteligente</string>
+    <string name="onboarding_desc_2">Registra tus análisis y descubre patrones. Identifica qué desencadena tus brotes y observa tu evolución en el tiempo.</string>
+
+    <string name="onboarding_title_3">Tu privacidad es primero</string>
+    <string name="onboarding_desc_3">Todas las fotos se procesan localmente en tu dispositivo. No almacenamos ni transmitimos tus imágenes a ningún servidor.</string>
+
+    <!-- ========================================= -->
+    <!-- Consent                                   -->
+    <!-- ========================================= -->
+    <string name="consent_title">Antes de comenzar</string>
+    <string name="consent_check_1">Entiendo que esta app NO reemplaza el diagnóstico médico profesional</string>
+    <string name="consent_check_2">Acepto el aviso de privacidad (LFPDPPP)</string>
+    <string name="consent_check_3">Entiendo que mis fotos se procesan localmente en mi dispositivo</string>
+    <string name="consent_read_privacy">Leer aviso de privacidad completo</string>
+    <string name="consent_accept">Aceptar y continuar</string>
+
+    <!-- ========================================= -->
+    <!-- Capture Screen (Critical UX)              -->
+    <!-- ========================================= -->
+    <string name="capture_title">Análisis facial</string>
+    <string name="capture_cancel">Cancelar</string>
+
+    <!-- Dynamic instructions -->
+    <string name="capture_searching">Centra tu rostro en el óvalo</string>
+    <string name="capture_too_far">Acércate un poco más</string>
+    <string name="capture_too_close">Aléjate un poco</string>
+    <string name="capture_bad_light">Busca un lugar con mejor luz natural 💡</string>
+    <string name="capture_tilt">Mantén el rostro de frente</string>
+    <string name="capture_ready">¡Perfecto! Mantente quieto</string>
+    <string name="capture_processing">Analizando tu piel…</string>
+
+    <string name="capture_indicator_light">Luz</string>
+    <string name="capture_indicator_distance">Distancia</string>
+    <string name="capture_indicator_stability">Estable</string>
+    <string name="indicator_ok">✓</string>
+    <string name="indicator_fail">✗</string>
+
+    <string name="capture_btn">Capturar</string>
+    <string name="capture_flash">Flash</string>
+    <string name="capture_switch_camera">Cambiar cámara</string>
+
+    <!-- ========================================= -->
+    <!-- Results Screen                            -->
+    <!-- ========================================= -->
+    <string name="results_title">Resultados del análisis</string>
+    <string name="results_save">Guardar</string>
+    <string name="results_share">Compartir</string>
+    <string name="results_saved_message">Análisis guardado en tu historial</string>
+    <string name="results_updated_message">Análisis actualizado correctamente</string>
+    <string name="results_invalid_input">No se recibió un resultado válido. Mostrando valor de referencia.</string>
+
+    <string name="results_redness_index">Índice de Rojez</string>
+    <string name="results_score_of">%1$d de 100</string>
+    <string name="results_severity">Nivel</string>
+
+    <string name="severity_mild">Leve</string>
+    <string name="severity_moderate">Moderado</string>
+    <string name="severity_severe">Elevado</string>
+
+    <string name="results_what_means">¿Qué significa esto?</string>
+    <string name="results_desc_mild">La rojez detectada es consistente con signos leves de eritema facial. Esto puede ser normal o indicar una etapa temprana que vale la pena monitorear.</string>
+    <string name="results_desc_moderate">Se detectaron signos moderados de rojez e inflamación. Te recomendamos consultar con un dermatólogo para una evaluación profesional.</string>
+    <string name="results_desc_severe">Los signos detectados sugieren un nivel elevado de rojez facial. Es importante que consultes a un especialista lo antes posible.</string>
+
+    <string name="results_recommendations">Recomendaciones</string>
+    <string name="results_rec_sunscreen">Usar protector solar SPF 30+ diariamente</string>
+    <string name="results_rec_temperature">Evitar cambios bruscos de temperatura</string>
+    <string name="results_rec_doctor">Consultar con un dermatólogo</string>
+    <string name="results_book_appointment">📅 Agendar cita</string>
+
+    <string name="results_heatmap_title">Mapa de detección</string>
+
+    <!-- ========================================= -->
+    <!-- Disclaimer (Critical Legal)               -->
+    <!-- ========================================= -->
+    <string name="disclaimer_short">⚠️ Esta app no reemplaza el consejo médico profesional. Consulte siempre a un dermatólogo.</string>
+    <string name="disclaimer_full">IADerm es una herramienta educativa de seguimiento de bienestar. No es un dispositivo médico y no proporciona diagnósticos médicos. Los resultados mostrados son estimaciones basadas en análisis visual con inteligencia artificial y NO sustituyen la evaluación de un profesional de la salud. Si presenta síntomas persistentes, consulte a un dermatólogo certificado.</string>
+    <string name="disclaimer_popup_title">Aviso importante</string>
+    <string name="disclaimer_popup_accept">Entendido</string>
+
+    <!-- ========================================= -->
+    <!-- History Screen                            -->
+    <!-- ========================================= -->
+    <string name="history_title">Tu historial</string>
+    <string name="history_trend_title">Tendencia (últimos 30 días)</string>
+    <string name="history_previous">Análisis anteriores</string>
+    <string name="history_view">Ver</string>
+    <string name="history_compare">Comparar</string>
+    <string name="history_empty">Aún no tienes análisis registrados</string>
+    <string name="history_export_pdf">Exportar reporte PDF</string>
+    <string name="history_sample_avg">47</string>
+    <string name="history_sample_trend">↓ 16%</string>
+    <string name="history_sample_record">Registro %1$d</string>
+    <string name="history_label_average">Promedio</string>
+    <string name="history_label_analyses">Análisis</string>
+    <string name="history_label_trend">Tendencia</string>
+    <string name="history_trend_up">↑ %1$d%%</string>
+    <string name="history_trend_down">↓ %1$d%%</string>
+    <string name="history_trend_flat">—</string>
+
+    <!-- ========================================= -->
+    <!-- Triggers                                  -->
+    <!-- ========================================= -->
+    <string name="triggers_title">Registro de desencadenantes</string>
+    <string name="trigger_sun">☀️ Sol</string>
+    <string name="trigger_alcohol">🍷 Alcohol</string>
+    <string name="trigger_spicy">🌶️ Picante</string>
+    <string name="trigger_cosmetics">💄 Cosméticos</string>
+    <string name="trigger_exercise">🏃 Ejercicio</string>
+    <string name="trigger_temperature">🌡️ Temperatura</string>
+    <string name="trigger_other">📝 Otro</string>
+    <string name="trigger_save">Guardar registro</string>
+    <string name="trigger_saved">Registro guardado ✓</string>
+
+    <!-- ========================================= -->
+    <!-- Permissions                               -->
+    <!-- ========================================= -->
+    <string name="permission_camera_title">Permiso de cámara</string>
+    <string name="permission_camera_rationale">Para analizar tu piel, necesitamos acceder a la cámara frontal de tu dispositivo.</string>
+    <string name="permission_camera_denied">Se requiere la cámara para el análisis facial</string>
+    <string name="permission_granted">Permiso concedido</string>
+
+    <!-- ========================================= -->
+    <!-- General / Accessibility                   -->
+    <!-- ========================================= -->
+    <string name="cd_back">Volver</string>
+    <string name="cd_profile">Perfil</string>
+    <string name="cd_capture_button">Botón de captura de foto</string>
+    <string name="cd_flash_toggle">Activar o desactivar flash</string>
+    <string name="cd_switch_camera">Cambiar entre cámara frontal y trasera</string>
+    <string name="cd_heatmap">Mapa de calor mostrando zonas de rojez detectada</string>
+    <string name="cd_severity_indicator">Indicador de severidad: %1$s</string>
+    <string name="cd_light_indicator_ok">Indicador de luz: buena iluminación</string>
+    <string name="cd_light_indicator_bad">Indicador de luz: iluminación insuficiente</string>
+    <string name="cd_distance_indicator_ok">Indicador de distancia: correcta</string>
+    <string name="cd_distance_indicator_bad">Indicador de distancia: ajusta la distancia</string>
+    <string name="cd_stability_indicator_ok">Indicador de estabilidad: estable</string>
+    <string name="cd_stability_indicator_bad">Indicador de estabilidad: mantente quieto</string>
+
+    <!-- ========================================= -->
+    <!-- Error States                              -->
+    <!-- ========================================= -->
+    <string name="error_camera_config">Error al configurar la cámara</string>
+    <string name="error_camera_not_available">No se encontró una cámara compatible en este dispositivo</string>
+    <string name="error_no_face">No se detectó un rostro. Intenta de nuevo.</string>
+    <string name="error_analysis_failed">No se pudo completar el análisis. Intenta con mejor iluminación.</string>
+    <string name="error_analysis_save_failed">No se pudo guardar el análisis en el historial</string>
+    <string name="error_generic">Algo salió mal. Intenta de nuevo.</string>
+    <string name="feature_coming_soon">Funcionalidad disponible próximamente</string>
 </resources>

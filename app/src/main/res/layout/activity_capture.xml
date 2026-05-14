@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ================================================== -->
+<!-- CaptureActivity Layout — THE CRITICAL SCREEN       -->
+<!-- Guides user with real-time indicators for light,   -->
+<!-- distance, and stability before capturing photo     -->
+<!-- ================================================== -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <!-- Layer 1: Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Layer 2: Face Guide Overlay (custom view draws oval + dark mask) -->
+    <com.example.iaderm.FaceGuideView
+        android:id="@+id/faceGuideView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Layer 2.5: Medical Scanner Line Animation (visible only during processing) -->
+    <com.example.iaderm.ScanLineView
+        android:id="@+id/scanLineView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Layer 3: Top Bar — Cancel + Flash -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Cancel Button -->
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/capture_cancel"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/cd_back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Switch Camera Button -->
+        <ImageButton
+            android:id="@+id/btnCambiarCamara"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/cd_switch_camera"
+            android:layout_marginEnd="8dp"
+            app:tint="@android:color/white" />
+
+        <!-- Flash Toggle -->
+        <ImageButton
+            android:id="@+id/btnFlash"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/btn_star_big_on"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/cd_flash_toggle"
+            app:tint="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Layer 4: Dynamic Instruction Chip -->
+    <TextView
+        android:id="@+id/tvInstrucciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capture_searching"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:background="@drawable/bg_instruction_chip"
+        android:gravity="center"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Layer 5: Bottom Controls Container -->
+    <LinearLayout
+        android:id="@+id/bottomControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Indicator Row: Light | Distance | Stability -->
+        <LinearLayout
+            android:id="@+id/indicatorRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <!-- Light Indicator -->
+            <LinearLayout
+                android:id="@+id/indicatorLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_indicator_badge"
+                android:layout_marginEnd="12dp"
+                android:minWidth="72dp">
+                <TextView
+                    android:id="@+id/tvLightIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💡"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvLightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/capture_indicator_light"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tvLightStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✗"
+                    android:textColor="@color/error"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Distance Indicator -->
+            <LinearLayout
+                android:id="@+id/indicatorDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_indicator_badge"
+                android:layout_marginEnd="12dp"
+                android:minWidth="72dp">
+                <TextView
+                    android:id="@+id/tvDistanceIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📐"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvDistanceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/capture_indicator_distance"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tvDistanceStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✗"
+                    android:textColor="@color/error"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Stability Indicator -->
+            <LinearLayout
+                android:id="@+id/indicatorStability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_indicator_badge"
+                android:minWidth="72dp">
+                <TextView
+                    android:id="@+id/tvStabilityIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📷"
+                    android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvStabilityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/capture_indicator_stability"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tvStabilityStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✗"
+                    android:textColor="@color/error"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Capture Button (large shutter) -->
+        <View
+            android:id="@+id/btnCapturar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_capture_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:enabled="false"
+            android:alpha="0.4"
+            android:contentDescription="@string/cd_capture_button" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ========================================= -->
+    <!-- IADerm Design System — Dark Mode Colors   -->
+    <!-- ========================================= -->
+
+    <!-- Primary -->
+    <color name="primary">#FF4DB8AC</color>
+    <color name="primary_variant">#FF26A69A</color>
+    <color name="on_primary">#FF003735</color>
+    <color name="primary_container">#FF005355</color>
+    <color name="on_primary_container">#FFA7F0ED</color>
+
+    <!-- Secondary -->
+    <color name="secondary">#FFF4A896</color>
+    <color name="secondary_variant">#FFD08070</color>
+    <color name="on_secondary">#FF3B0B00</color>
+    <color name="secondary_container">#FF7B3525</color>
+    <color name="on_secondary_container">#FFFFDAD2</color>
+
+    <!-- Tertiary -->
+    <color name="tertiary">#FF8FA4B8</color>
+    <color name="on_tertiary">#FF1A2A3A</color>
+
+    <!-- Background / Surface -->
+    <color name="background">#FF121218</color>
+    <color name="on_background">#FFE8E8EC</color>
+    <color name="surface">#FF1E1E2A</color>
+    <color name="on_surface">#FFB0B0BE</color>
+    <color name="surface_variant">#FF2A2A3A</color>
+    <color name="on_surface_variant">#FFC8C0D0</color>
+    <color name="outline">#FF48454E</color>
+
+    <!-- Semantic Colors -->
+    <color name="error">#FFEF7878</color>
+    <color name="on_error">#FF600000</color>
+    <color name="success">#FF6FD9A4</color>
+    <color name="on_success">#FF003D1E</color>
+    <color name="warning">#FFFFC46B</color>
+    <color name="on_warning">#FF3D2E00</color>
+
+    <!-- Heatmap (same in dark mode) -->
+    <color name="heatmap_low">#FFFFEAA7</color>
+    <color name="heatmap_medium">#FFF39C6B</color>
+    <color name="heatmap_high">#FFE55B6C</color>
+
+    <!-- Severity Chip Colors -->
+    <color name="severity_mild_bg">#FF1A3D28</color>
+    <color name="severity_mild_text">#FF6FD9A4</color>
+    <color name="severity_moderate_bg">#FF3D2E00</color>
+    <color name="severity_moderate_text">#FFFFC46B</color>
+    <color name="severity_severe_bg">#FF3D1010</color>
+    <color name="severity_severe_text">#FFEF7878</color>
+
+    <!-- Capture Screen States -->
+    <color name="guide_searching">#FFFFFFFF</color>
+    <color name="guide_adjusting">#FFFFC46B</color>
+    <color name="guide_ready">#FF6FD9A4</color>
+
+    <!-- Overlay -->
+    <color name="overlay_dark">#B3000000</color>
+    <color name="overlay_instruction_bg">#CC1A1A2E</color>
+</resources>

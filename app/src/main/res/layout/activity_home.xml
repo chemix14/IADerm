@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ================================================== -->
+<!-- HomeActivity Layout — Main Dashboard               -->
+<!-- Greeting, last analysis card, quick actions,       -->
+<!-- daily tip, FAB, and bottom navigation              -->
+<!-- ================================================== -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="48dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <!-- Top Bar: Greeting + Icons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_greeting"
+                        android:textAppearance="@style/TextAppearance.IADerm.Headline"
+                        android:textColor="@color/on_background" />
+
+                    <TextView
+                        android:id="@+id/tvSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_skin_today"
+                        android:textAppearance="@style/TextAppearance.IADerm.Body"
+                        android:textColor="@color/on_surface"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@android:drawable/ic_menu_preferences"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerInside"
+                    android:contentDescription="@string/cd_settings"
+                    app:tint="@color/on_surface" />
+            </LinearLayout>
+
+            <!-- Last Analysis Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLastAnalysis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.IADerm.Card"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Severity Dot -->
+                        <View
+                            android:id="@+id/viewSeverityDot"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:background="@drawable/bg_capture_button"
+                            android:backgroundTint="@color/success" />
+
+                        <TextView
+                            android:id="@+id/tvLastAnalysisLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_last_analysis"
+                            android:textAppearance="@style/TextAppearance.IADerm.Label"
+                            android:textColor="@color/on_surface"
+                            android:layout_marginStart="8dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvLastAnalysisDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                        android:textColor="@color/on_surface_variant"
+                        android:layout_marginTop="8dp"
+                        tools:text="Hace 3 días — Leve" />
+
+                    <!-- Score Bar -->
+                    <ProgressBar
+                        android:id="@+id/progressScore"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="100"
+                        android:progress="42"
+                        android:progressTint="@color/primary"
+                        android:progressBackgroundTint="@color/surface_variant"
+                        android:layout_marginTop="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvScoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.IADerm.Caption"
+                        android:layout_marginTop="4dp"
+                        tools:text="Índice de Rojez: 42/100" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_view_details"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:textColor="@color/primary"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="0dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Quick Action Cards Row -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_quick_actions"
+                android:textAppearance="@style/TextAppearance.IADerm.Title"
+                android:textColor="@color/on_background"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <!-- History Quick Action -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardHistory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.IADerm.Card.Outlined"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📊"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nav_history"
+                            android:textAppearance="@style/TextAppearance.IADerm.Label"
+                            android:textColor="@color/on_surface"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Triggers Quick Action -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTriggers"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.IADerm.Card.Outlined"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="16dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📝"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nav_triggers"
+                            android:textAppearance="@style/TextAppearance.IADerm.Label"
+                            android:textColor="@color/on_surface"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Tip of the Day Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.IADerm.Card"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/primary_container">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_tip_title"
+                        android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_primary_container" />
+
+                    <TextView
+                        android:id="@+id/tvTipContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_tip_content"
+                        android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                        android:textColor="@color/on_primary_container"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingMultiplier="1.3" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Disclaimer -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/disclaimer_short"
+                android:textAppearance="@style/TextAppearance.IADerm.Disclaimer"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Action Button: Analyze -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAnalyze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_analyze_btn"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:iconTint="@color/on_primary"
+        android:textColor="@color/on_primary"
+        app:backgroundTint="@color/primary"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="80dp"
+        app:layout_anchor="@id/bottomNav"
+        app:layout_anchorGravity="top|center_horizontal"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/Widget.IADerm.BottomNav"
+        app:labelVisibilityMode="labeled" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ================================================== -->
+<!-- OnboardingActivity Layout — 3-step onboarding      -->
+<!-- with ViewPager2 + consent checkboxes on final page -->
+<!-- ================================================== -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Skip button (top right) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingTop="48dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_skip"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- ViewPager for onboarding slides -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Bottom section: Page indicators + Next/Start button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="40dp">
+
+        <!-- Page indicators (dots) -->
+        <LinearLayout
+            android:id="@+id/dotsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Consent checkboxes (visible only on last page) -->
+        <LinearLayout
+            android:id="@+id/consentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp">
+
+            <CheckBox
+                android:id="@+id/checkDisclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_check_1"
+                android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                android:textColor="@color/on_surface"
+                android:buttonTint="@color/primary"
+                android:minHeight="48dp"
+                android:layout_marginBottom="4dp" />
+
+            <CheckBox
+                android:id="@+id/checkPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_check_2"
+                android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                android:textColor="@color/on_surface"
+                android:buttonTint="@color/primary"
+                android:minHeight="48dp"
+                android:layout_marginBottom="4dp" />
+
+            <CheckBox
+                android:id="@+id/checkLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_check_3"
+                android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                android:textColor="@color/on_surface"
+                android:buttonTint="@color/primary"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/btnReadPrivacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/consent_read_privacy"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Next / Start button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_next"
+            style="@style/Widget.IADerm.Button.Primary" />
+    </LinearLayout>
+</LinearLayout>
