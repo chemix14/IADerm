@@ -3,8 +3,6 @@ package com.example.iaderm;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.iaderm.data.AnalysisRecord;
 import com.example.iaderm.viewmodel.ResultsViewModel;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 /**
  * ResultsActivity — Displays the analysis results.
@@ -26,15 +25,15 @@ import com.google.android.material.chip.Chip;
  */
 public class ResultsActivity extends AppCompatActivity {
 
-    private ProgressBar progressScore;
+    private CircularProgressIndicator progressScore;
     private TextView tvScore;
     private TextView tvDiagnosisLabel;
     private TextView tvTop3List;
     private TextView tvResultDescription;
     private TextView tvRecommendationList;
     private Chip chipSeverity;
-    private ImageButton btnBack;
-    private ImageButton btnSave;
+    private com.google.android.material.button.MaterialButton btnBack;
+    private com.google.android.material.button.MaterialButton btnSave;
     private com.google.android.material.button.MaterialButton btnBookAppointment;
     private ResultsViewModel viewModel;
 
@@ -189,14 +188,11 @@ public class ResultsActivity extends AppCompatActivity {
 
             // Update progress bar tint based on current value
             if (value <= 35) {
-                progressScore.setProgressTintList(
-                        android.content.res.ColorStateList.valueOf(getColor(R.color.success)));
+                progressScore.setIndicatorColor(getColor(R.color.success));
             } else if (value <= 65) {
-                progressScore.setProgressTintList(
-                        android.content.res.ColorStateList.valueOf(getColor(R.color.warning)));
+                progressScore.setIndicatorColor(getColor(R.color.warning));
             } else {
-                progressScore.setProgressTintList(
-                        android.content.res.ColorStateList.valueOf(getColor(R.color.error)));
+                progressScore.setIndicatorColor(getColor(R.color.error));
             }
         });
 

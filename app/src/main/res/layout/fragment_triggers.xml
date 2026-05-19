@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_triggers"
+            android:textAppearance="@style/TextAppearance.IADerm.Headline"
+            android:layout_marginBottom="24dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triggers_type_label"
+                    android:textAppearance="@style/TextAppearance.IADerm.Label"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cgTriggerType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true"
+                    app:chipSpacingVertical="8dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSun"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_sun" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFood"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_food" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipStress"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_stress" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSleep"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_sleep" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipWeather"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_weather" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSkincare"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_skincare" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAlcohol"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_alcohol" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSpicy"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_spicy" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCosmetics"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_cosmetics" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipExercise"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_exercise" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTemperature"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_temperature" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipOther"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trigger_other" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Intensity Slider -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triggers_severity_label"
+                    android:textAppearance="@style/TextAppearance.IADerm.Label"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/sliderIntensity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="0"
+                    android:valueTo="5"
+                    android:stepSize="1" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveTrigger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trigger_save"
+            style="@style/Widget.IADerm.Button.Primary"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

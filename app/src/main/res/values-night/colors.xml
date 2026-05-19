@@ -1,63 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ========================================= -->
-    <!-- IADerm Design System — Dark Mode Colors   -->
-    <!-- ========================================= -->
+    <!-- Material 3 Pure Black Tonal Palette -->
+    <color name="primary">#54D6F1</color>
+    <color name="on_primary">#003640</color>
+    <color name="primary_container">#004E59</color>
+    <color name="on_primary_container">#ABEDFF</color>
 
-    <!-- Primary -->
-    <color name="primary">#FF4DB8AC</color>
-    <color name="primary_variant">#FF26A69A</color>
-    <color name="on_primary">#FF003735</color>
-    <color name="primary_container">#FF005355</color>
-    <color name="on_primary_container">#FFA7F0ED</color>
+    <color name="secondary">#B1CBD1</color>
+    <color name="on_secondary">#1D3439</color>
+    <color name="secondary_container">#334A4F</color>
+    <color name="on_secondary_container">#CDE7EE</color>
 
-    <!-- Secondary -->
-    <color name="secondary">#FFF4A896</color>
-    <color name="secondary_variant">#FFD08070</color>
-    <color name="on_secondary">#FF3B0B00</color>
-    <color name="secondary_container">#FF7B3525</color>
-    <color name="on_secondary_container">#FFFFDAD2</color>
+    <color name="tertiary">#BDC7DC</color>
+    <color name="on_tertiary">#273141</color>
+    <color name="tertiary_container">#3D4658</color>
+    <color name="on_tertiary_container">#D9E2F9</color>
 
-    <!-- Tertiary -->
-    <color name="tertiary">#FF8FA4B8</color>
-    <color name="on_tertiary">#FF1A2A3A</color>
-
-    <!-- Background / Surface -->
-    <color name="background">#FF121218</color>
-    <color name="on_background">#FFE8E8EC</color>
-    <color name="surface">#FF1E1E2A</color>
-    <color name="on_surface">#FFB0B0BE</color>
-    <color name="surface_variant">#FF2A2A3A</color>
-    <color name="on_surface_variant">#FFC8C0D0</color>
-    <color name="outline">#FF48454E</color>
+    <!-- Pure Black Backgrounds -->
+    <color name="background">#000000</color>
+    <color name="on_background">#E1E2E3</color>
+    <color name="surface">#000000</color>
+    <color name="on_surface">#E1E2E3</color>
+    <color name="surface_variant">#1A1C1E</color>
+    <color name="on_surface_variant">#BFC8CB</color>
+    <color name="outline">#899295</color>
 
     <!-- Semantic Colors -->
-    <color name="error">#FFEF7878</color>
-    <color name="on_error">#FF600000</color>
-    <color name="success">#FF6FD9A4</color>
-    <color name="on_success">#FF003D1E</color>
-    <color name="warning">#FFFFC46B</color>
-    <color name="on_warning">#FF3D2E00</color>
+    <color name="error">#FFB4AB</color>
+    <color name="on_error">#690005</color>
+    <color name="success">#6FD9A4</color>
+    <color name="warning">#FFC46B</color>
 
-    <!-- Heatmap (same in dark mode) -->
+    <!-- Severity Mapping (Dark) -->
+    <color name="severity_mild_bg">#004E59</color>
+    <color name="severity_mild_text">#ABEDFF</color>
+    <color name="severity_moderate_bg">#5D4000</color>
+    <color name="severity_moderate_text">#FFE08D</color>
+    <color name="severity_severe_bg">#93000A</color>
+    <color name="severity_severe_text">#FFDAD6</color>
+
+    <!-- Heatmap -->
     <color name="heatmap_low">#FFFFEAA7</color>
     <color name="heatmap_medium">#FFF39C6B</color>
     <color name="heatmap_high">#FFE55B6C</color>
 
-    <!-- Severity Chip Colors -->
-    <color name="severity_mild_bg">#FF1A3D28</color>
-    <color name="severity_mild_text">#FF6FD9A4</color>
-    <color name="severity_moderate_bg">#FF3D2E00</color>
-    <color name="severity_moderate_text">#FFFFC46B</color>
-    <color name="severity_severe_bg">#FF3D1010</color>
-    <color name="severity_severe_text">#FFEF7878</color>
-
     <!-- Capture Screen States -->
-    <color name="guide_searching">#FFFFFFFF</color>
-    <color name="guide_adjusting">#FFFFC46B</color>
-    <color name="guide_ready">#FF6FD9A4</color>
+    <color name="guide_searching">#FFFFFF</color>
+    <color name="guide_adjusting">#FFC46B</color>
+    <color name="guide_ready">#6FD9A4</color>
+    <color name="overlay_instruction_bg">#CC1A1C1E</color>
 
-    <!-- Overlay -->
-    <color name="overlay_dark">#B3000000</color>
-    <color name="overlay_instruction_bg">#CC1A1A2E</color>
+    <!-- Legacy / Compatibility -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

@@ -1,60 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <!-- Capa 1: El video de la cámara -->
-    <TextureView
-        android:id="@+id/textureView"
+    <!-- Fragment Container -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingBottom="80dp" />
 
-    <!-- Capa 2: La máscara con el óvalo -->
-    <com.example.iaderm.FaceGuideView
+    <!-- FAB for Capture -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAnalyze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_analyze_btn"
+        app:icon="@android:drawable/ic_menu_camera"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="96dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <!-- Capa 3: Instrucciones y estado de luz -->
-    <TextView
-        android:id="@+id/tvInstrucciones"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Centra tu rostro"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="#80000000"
-        android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/Widget.IADerm.BottomNav"
+        app:labelVisibilityMode="labeled" />
 
-    <!-- Capa 4: El botón de captura -->
-    <Button
-        android:id="@+id/btnCapturar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Capturar RAW"
-        android:textSize="18sp"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="60dp"/>
-
-    <!-- Capa 5: El botón para cambiar de cámara (El que causaba el error) -->
-    <Button
-        android:id="@+id/btnCambiarCamara"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Girar"
-        android:padding="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

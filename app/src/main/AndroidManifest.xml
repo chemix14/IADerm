@@ -34,8 +34,14 @@
         </activity>
 
         <!-- ========================================= -->
-        <!-- Home Dashboard                            -->
+        <!-- Main Activity: Tabbed Interface           -->
         <!-- ========================================= -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+
+        <!-- Legacy Dashboard (Internal usage) -->
         <activity
             android:name=".HomeActivity"
             android:exported="false"

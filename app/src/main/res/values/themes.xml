@@ -1,25 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.IADerm" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary Brand Colors -->
+    <style name="Base.Theme.IADerm" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryContainer">@color/primary_container</item>
         <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
-
-        <!-- Secondary Brand Colors -->
         <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary_variant</item>
         <item name="colorOnSecondary">@color/on_secondary</item>
         <item name="colorSecondaryContainer">@color/secondary_container</item>
         <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
-
-        <!-- Tertiary Brand Colors -->
         <item name="colorTertiary">@color/tertiary</item>
         <item name="colorOnTertiary">@color/on_tertiary</item>
-
-        <!-- Background & Surface -->
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/on_background</item>
         <item name="colorSurface">@color/surface</item>
@@ -27,22 +20,17 @@
         <item name="colorSurfaceVariant">@color/surface_variant</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
         <item name="colorOutline">@color/outline</item>
-
-        <!-- Error -->
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/on_error</item>
 
-        <!-- Status bar -->
-        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
     <style name="Theme.IADerm" parent="Base.Theme.IADerm" />
 
-    <!-- ========================================= -->
-    <!-- Capture Screen: Force Light (for better   -->
-    <!-- facial illumination during camera use)    -->
-    <!-- ========================================= -->
     <style name="Theme.IADerm.Capture" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -51,135 +39,52 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <!-- ========================================= -->
-    <!-- Splash Screen Theme                       -->
-    <!-- ========================================= -->
-    <style name="Theme.IADerm.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.IADerm.Splash" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@color/primary</item>
         <item name="android:navigationBarColor">@color/primary</item>
         <item name="android:colorBackground">@color/primary</item>
     </style>
 
-    <!-- ========================================= -->
-    <!-- Component Styles                          -->
-    <!-- ========================================= -->
-
-    <!-- Primary Button -->
+    <!-- Unified Component Styles -->
     <style name="Widget.IADerm.Button.Primary" parent="Widget.Material3.Button">
         <item name="cornerRadius">28dp</item>
-        <item name="android:paddingStart">32dp</item>
-        <item name="android:paddingEnd">32dp</item>
-        <item name="android:paddingTop">14dp</item>
-        <item name="android:paddingBottom">14dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.02</item>
     </style>
 
-    <!-- Outlined Button -->
-    <style name="Widget.IADerm.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">28dp</item>
-        <item name="strokeColor">@color/primary</item>
-        <item name="strokeWidth">1.5dp</item>
-        <item name="android:textColor">@color/primary</item>
-    </style>
-
-    <!-- Card Style -->
     <style name="Widget.IADerm.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="cardCornerRadius">24dp</item>
-        <item name="cardElevation">8dp</item>
-        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardElevation">2dp</item>
     </style>
 
-    <!-- Card Outlined Style -->
     <style name="Widget.IADerm.Card.Outlined" parent="Widget.Material3.CardView.Outlined">
         <item name="cardCornerRadius">24dp</item>
-        <item name="strokeColor">@color/outline</item>
-        <item name="strokeWidth">1dp</item>
     </style>
 
-    <!-- Severity Chip: Mild -->
     <style name="Widget.IADerm.Chip.Severity.Mild" parent="Widget.Material3.Chip.Assist">
         <item name="chipBackgroundColor">@color/severity_mild_bg</item>
         <item name="android:textColor">@color/severity_mild_text</item>
         <item name="chipCornerRadius">20dp</item>
+        <item name="chipStrokeWidth">0dp</item>
     </style>
 
-    <!-- Severity Chip: Moderate -->
-    <style name="Widget.IADerm.Chip.Severity.Moderate" parent="Widget.Material3.Chip.Assist">
-        <item name="chipBackgroundColor">@color/severity_moderate_bg</item>
-        <item name="android:textColor">@color/severity_moderate_text</item>
-        <item name="chipCornerRadius">20dp</item>
-    </style>
-
-    <!-- Severity Chip: Severe -->
-    <style name="Widget.IADerm.Chip.Severity.Severe" parent="Widget.Material3.Chip.Assist">
-        <item name="chipBackgroundColor">@color/severity_severe_bg</item>
-        <item name="android:textColor">@color/severity_severe_text</item>
-        <item name="chipCornerRadius">20dp</item>
-    </style>
-
-    <!-- Bottom Navigation -->
     <style name="Widget.IADerm.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">@color/surface</item>
-        <item name="itemIconTint">@color/on_surface</item>
-        <item name="itemTextColor">@color/on_surface</item>
-        <item name="itemActiveIndicatorStyle">@style/Widget.IADerm.BottomNav.ActiveIndicator</item>
     </style>
 
-    <style name="Widget.IADerm.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/primary_container</item>
-    </style>
-
-    <!-- Capture Button (Big circular capture button) -->
-    <style name="Widget.IADerm.CaptureButton" parent="">
-        <item name="android:background">@color/primary</item>
-        <item name="android:padding">4dp</item>
-    </style>
-
-    <!-- Text Styles -->
-    <style name="TextAppearance.IADerm.Display" parent="TextAppearance.Material3.DisplaySmall">
-        <item name="android:textSize">32sp</item>
-        <item name="android:fontFamily">sans-serif</item>
+    <!-- Typography Compatibility -->
+    <style name="TextAppearance.IADerm.Headline" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="android:textStyle">bold</item>
     </style>
-
-    <style name="TextAppearance.IADerm.Headline" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+    <style name="TextAppearance.IADerm.Title" parent="TextAppearance.Material3.TitleLarge"/>
+    <style name="TextAppearance.IADerm.Body" parent="TextAppearance.Material3.BodyLarge"/>
+    <style name="TextAppearance.IADerm.BodySmall" parent="TextAppearance.Material3.BodyMedium"/>
+    <style name="TextAppearance.IADerm.Label" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textStyle">bold</item>
     </style>
-
-    <style name="TextAppearance.IADerm.Title" parent="TextAppearance.Material3.TitleMedium">
-        <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
-
-    <style name="TextAppearance.IADerm.Body" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
-
-    <style name="TextAppearance.IADerm.BodySmall" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
-
-    <style name="TextAppearance.IADerm.Label" parent="TextAppearance.Material3.LabelMedium">
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
-
     <style name="TextAppearance.IADerm.Caption" parent="TextAppearance.Material3.LabelSmall">
-        <item name="android:textSize">10sp</item>
-        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/on_surface_variant</item>
     </style>
-
-    <!-- Disclaimer text style -->
-    <style name="TextAppearance.IADerm.Disclaimer" parent="TextAppearance.Material3.BodySmall">
-        <item name="android:textSize">11sp</item>
-        <item name="android:fontFamily">sans-serif</item>
+    <style name="TextAppearance.IADerm.Disclaimer" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:textColor">@color/on_surface_variant</item>
-        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:alpha">0.7</item>
     </style>
 </resources>

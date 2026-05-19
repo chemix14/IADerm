@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ================================================== -->
-<!-- OnboardingActivity Layout — 3-step onboarding      -->
-<!-- with ViewPager2 + consent checkboxes on final page -->
-<!-- ================================================== -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,35 +7,23 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <!-- Skip button (top right) -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSkip"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:paddingTop="48dp"
-        android:paddingEnd="16dp">
+        android:layout_gravity="end"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/onboarding_skip"
+        android:textColor="@color/on_surface_variant" />
 
-        <TextView
-            android:id="@+id/btnSkip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/onboarding_skip"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-medium"
-            android:padding="12dp"
-            android:clickable="true"
-            android:focusable="true" />
-    </LinearLayout>
-
-    <!-- ViewPager for onboarding slides -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- Bottom section: Page indicators + Next/Start button -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,78 +31,63 @@
         android:gravity="center_horizontal"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:paddingBottom="40dp">
+        android:paddingBottom="48dp">
 
-        <!-- Page indicators (dots) -->
         <LinearLayout
             android:id="@+id/dotsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="32dp" />
 
-        <!-- Consent checkboxes (visible only on last page) -->
         <LinearLayout
             android:id="@+id/consentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="24dp">
 
-            <CheckBox
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkDisclaimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/consent_check_1"
                 android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
-                android:textColor="@color/on_surface"
-                android:buttonTint="@color/primary"
-                android:minHeight="48dp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="8dp" />
 
-            <CheckBox
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkPrivacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/consent_check_2"
                 android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
-                android:textColor="@color/on_surface"
-                android:buttonTint="@color/primary"
-                android:minHeight="48dp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="8dp" />
 
-            <CheckBox
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkLocal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/consent_check_3"
                 android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
-                android:textColor="@color/on_surface"
-                android:buttonTint="@color/primary"
-                android:minHeight="48dp" />
+                android:layout_marginBottom="12dp" />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReadPrivacy"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/consent_read_privacy"
-                android:textColor="@color/primary"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif-medium"
-                android:padding="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Next / Start button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/onboarding_next"
-            style="@style/Widget.IADerm.Button.Primary" />
+            style="@style/Widget.IADerm.Button.Primary"
+            android:padding="16dp" />
     </LinearLayout>
 </LinearLayout>

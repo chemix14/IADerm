@@ -18,7 +18,7 @@ public final class AppNavigator {
     }
 
     public static void openHome(Context context) {
-        context.startActivity(new Intent(context, HomeActivity.class));
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 
     public static void openCapture(Context context) {
