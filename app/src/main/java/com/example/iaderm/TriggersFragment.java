@@ -138,10 +138,9 @@ public class TriggersFragment extends Fragment {
         ));
         row1.setGravity(android.view.Gravity.CENTER_VERTICAL);
 
-        // Type label with emoji
-        String emoji = TriggerRecord.getEmojiForType(record.triggerType);
+        // Type label without emoji
         TextView tvType = new TextView(getContext());
-        tvType.setText(emoji + " " + record.triggerType);
+        tvType.setText(record.triggerType);
         tvType.setTextSize(16f);
         tvType.setTypeface(null, android.graphics.Typeface.BOLD);
         tvType.setTextColor(getResources().getColor(R.color.on_surface, null));
@@ -203,7 +202,7 @@ public class TriggersFragment extends Fragment {
         // Row 3: Notes (if any)
         if (record.description != null && !record.description.isEmpty()) {
             TextView tvNotes = new TextView(getContext());
-            tvNotes.setText("📝 " + record.description);
+            tvNotes.setText("Nota: " + record.description);
             tvNotes.setTextSize(13f);
             tvNotes.setTextColor(getResources().getColor(R.color.on_surface_variant, null));
             LinearLayout.LayoutParams notesParams = new LinearLayout.LayoutParams(

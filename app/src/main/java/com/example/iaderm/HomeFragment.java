@@ -115,14 +115,14 @@ public class HomeFragment extends Fragment {
 
             // Determine category based on index range
             String category;
-            if (index < 15) category = "☀️ Protección Solar";
-            else if (index < 30) category = "🍎 Alimentación";
-            else if (index < 50) category = "🧴 Cuidado de Piel";
-            else if (index < 65) category = "🧠 Bienestar";
-            else if (index < 75) category = "🏃 Ejercicio";
-            else if (index < 90) category = "🌡️ Clima y Ambiente";
-            else if (index < 100) category = "💄 Maquillaje";
-            else category = "🩺 Salud General";
+            if (index < 15) category = "Protección Solar";
+            else if (index < 30) category = "Alimentación";
+            else if (index < 50) category = "Cuidado de Piel";
+            else if (index < 65) category = "Bienestar";
+            else if (index < 75) category = "Ejercicio";
+            else if (index < 90) category = "Clima y Ambiente";
+            else if (index < 100) category = "Maquillaje";
+            else category = "Salud General";
 
             if (tvTipCategory != null) {
                 tvTipCategory.setText(category);

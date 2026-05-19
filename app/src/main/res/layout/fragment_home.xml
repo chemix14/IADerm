@@ -72,11 +72,7 @@
                         android:textAppearance="@style/TextAppearance.IADerm.Label"
                         android:textColor="@color/on_primary_container" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🔬"
-                        android:textSize="20sp" />
+
                 </LinearLayout>
 
                 <TextView
@@ -151,11 +147,7 @@
                     android:gravity="center"
                     android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📊"
-                        android:textSize="28sp" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -193,11 +185,7 @@
                     android:gravity="center"
                     android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📝"
-                        android:textSize="28sp" />
+
 
                     <TextView
                         android:layout_width="wrap_content"

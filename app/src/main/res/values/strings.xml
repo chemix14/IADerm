@@ -19,11 +19,11 @@
     <!-- Triggers -->
     <string name="title_triggers">Registrar Desencadenante</string>
     <string name="triggers_type_label">¿Qué deseas registrar?</string>
-    <string name="trigger_food">🍎 Alimentación</string>
-    <string name="trigger_stress">🧠 Estrés / Ansiedad</string>
-    <string name="trigger_sleep">💤 Falta de sueño</string>
-    <string name="trigger_weather">☀️ Clima extremo</string>
-    <string name="trigger_skincare">🧴 Producto / Rutina</string>
+    <string name="trigger_food">Alimentación</string>
+    <string name="trigger_stress">Estrés / Ansiedad</string>
+    <string name="trigger_sleep">Falta de sueño</string>
+    <string name="trigger_weather">Clima extremo</string>
+    <string name="trigger_skincare">Producto / Rutina</string>
     <string name="triggers_severity_label">Intensidad</string>
     <string name="triggers_notes_label">Notas (Opcional)</string>
     <string name="triggers_notes_hint">Ej: Comí lácteos, probé nueva crema...</string>
@@ -41,7 +41,7 @@
     <string name="home_no_analysis">Aún no has realizado tu primer análisis</string>
     <string name="home_start_first">Comenzar primer análisis</string>
     <string name="home_quick_actions">Acciones rápidas</string>
-    <string name="home_tip_title">💡 Tip del día</string>
+    <string name="home_tip_title">Tip del día</string>
     <string name="home_analyze_btn">Analizar mi piel</string>
     <string name="home_tip_content">El protector solar SPF 30+ reduce la frecuencia de brotes de rojez hasta un 40%</string>
     <string name="home_score_label">Índice de rojez: %1$d/100</string>
@@ -83,7 +83,7 @@
     <string name="capture_searching">Centra tu rostro en el óvalo</string>
     <string name="capture_too_far">Acércate un poco más</string>
     <string name="capture_too_close">Aléjate un poco</string>
-    <string name="capture_bad_light">Busca un lugar con mejor luz natural 💡</string>
+    <string name="capture_bad_light">Busca un lugar con mejor luz natural</string>
     <string name="capture_tilt">Mantén el rostro de frente</string>
     <string name="capture_ready">¡Perfecto! Mantente quieto</string>
     <string name="capture_processing">Analizando tu piel…</string>
@@ -125,14 +125,14 @@
     <string name="results_rec_sunscreen">Usar protector solar SPF 30+ diariamente</string>
     <string name="results_rec_temperature">Evitar cambios bruscos de temperatura</string>
     <string name="results_rec_doctor">Consultar con un dermatólogo</string>
-    <string name="results_book_appointment">📅 Agendar cita</string>
+    <string name="results_book_appointment">Agendar cita</string>
 
     <string name="results_heatmap_title">Mapa de detección</string>
 
     <!-- ========================================= -->
     <!-- Disclaimer (Critical Legal)               -->
     <!-- ========================================= -->
-    <string name="disclaimer_short">⚠️ Esta app no reemplaza el consejo médico profesional. Consulte siempre a un dermatólogo.</string>
+    <string name="disclaimer_short">Esta app no reemplaza el consejo médico profesional. Consulte siempre a un dermatólogo.</string>
     <string name="disclaimer_full">IADerm es una herramienta educativa de seguimiento de bienestar. No es un dispositivo médico y no proporciona diagnósticos médicos. Los resultados mostrados son estimaciones basadas en análisis visual con inteligencia artificial y NO sustituyen la evaluación de un profesional de la salud. Si presenta síntomas persistentes, consulte a un dermatólogo certificado.</string>
     <string name="disclaimer_popup_title">Aviso importante</string>
     <string name="disclaimer_popup_accept">Entendido</string>
@@ -161,13 +161,13 @@
     <!-- Triggers                                  -->
     <!-- ========================================= -->
     <string name="triggers_title">Registro de desencadenantes</string>
-    <string name="trigger_sun">☀️ Sol</string>
-    <string name="trigger_alcohol">🍷 Alcohol</string>
-    <string name="trigger_spicy">🌶️ Picante</string>
-    <string name="trigger_cosmetics">💄 Cosméticos</string>
-    <string name="trigger_exercise">🏃 Ejercicio</string>
-    <string name="trigger_temperature">🌡️ Temperatura</string>
-    <string name="trigger_other">📝 Otro</string>
+    <string name="trigger_sun">Sol</string>
+    <string name="trigger_alcohol">Alcohol</string>
+    <string name="trigger_spicy">Picante</string>
+    <string name="trigger_cosmetics">Cosméticos</string>
+    <string name="trigger_exercise">Ejercicio</string>
+    <string name="trigger_temperature">Temperatura</string>
+    <string name="trigger_other">Otro</string>
     <string name="trigger_save">Guardar registro</string>
     <string name="trigger_saved">Registro guardado ✓</string>
 
