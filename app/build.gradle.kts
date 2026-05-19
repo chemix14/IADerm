@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -14,6 +17,22 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Cargar GEMINI_API_KEY de local.properties o variable de entorno de forma segura
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            val inputStream = FileInputStream(localPropertiesFile)
+            localProperties.load(inputStream)
+            inputStream.close()
+        }
+        val geminiApiKeyRaw = localProperties.getProperty("gemini.api.key") ?: System.getenv("GEMINI_API_KEY") ?: ""
+        val geminiApiKey = if (geminiApiKeyRaw.startsWith("\"") && geminiApiKeyRaw.endsWith("\"")) {
+            geminiApiKeyRaw
+        } else {
+            "\"$geminiApiKeyRaw\""
+        }
+        buildConfigField("String", "GEMINI_API_KEY", geminiApiKey)
     }
 
     buildTypes {
@@ -32,6 +51,7 @@ android {
 
     buildFeatures {
         mlModelBinding = true
+        buildConfig = true
     }
 
     aaptOptions {

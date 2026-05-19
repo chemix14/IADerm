@@ -40,7 +40,7 @@ public class AIChatActivity extends AppCompatActivity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     
     // API CONFIGURATION
-    private static final String API_KEY = "AIzaSyDiBo_m0jzejO5OmZ3DjRuti8zOZWFZ3Dc";
+    private static final String API_KEY = BuildConfig.GEMINI_API_KEY;
     private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
     
     // Conversation History
