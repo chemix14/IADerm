@@ -187,6 +187,21 @@ public class HistoryFragment extends Fragment {
 
             holder.itemView.setOnClickListener(v ->
                     AppNavigator.openResults(v.getContext(), record.id, score, record.diagnosis, record.heatmapData));
+                    
+            if (record.imagePath != null && !record.imagePath.isEmpty()) {
+                try {
+                    android.graphics.Bitmap bmp = android.graphics.BitmapFactory.decodeFile(record.imagePath);
+                    if (bmp != null) {
+                        holder.ivItemPhoto.setImageBitmap(bmp);
+                    } else {
+                        holder.ivItemPhoto.setImageResource(android.R.color.transparent);
+                    }
+                } catch (Exception e) {
+                    holder.ivItemPhoto.setImageResource(android.R.color.transparent);
+                }
+            } else {
+                holder.ivItemPhoto.setImageResource(android.R.color.transparent);
+            }
         }
 
         @Override
@@ -199,6 +214,7 @@ public class HistoryFragment extends Fragment {
             TextView tvItemDate;
             Chip chipItemSeverity;
             MaterialButton btnItemCompare;
+            com.google.android.material.imageview.ShapeableImageView ivItemPhoto;
 
             Holder(View itemView) {
                 super(itemView);
@@ -206,6 +222,7 @@ public class HistoryFragment extends Fragment {
                 tvItemDate = itemView.findViewById(R.id.tvItemDate);
                 chipItemSeverity = itemView.findViewById(R.id.chipItemSeverity);
                 btnItemCompare = itemView.findViewById(R.id.btnItemCompare);
+                ivItemPhoto = itemView.findViewById(R.id.ivItemPhoto);
             }
         }
     }

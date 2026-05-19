@@ -35,6 +35,8 @@ public class ResultsActivity extends AppCompatActivity {
     private com.google.android.material.button.MaterialButton btnBack;
     private com.google.android.material.button.MaterialButton btnSave;
     private com.google.android.material.button.MaterialButton btnBookAppointment;
+    private android.view.View cardSuggestProfile;
+    private com.google.android.material.button.MaterialButton btnGoToProfile;
     private ResultsViewModel viewModel;
 
     private int analysisScore = 42; // Default demo score
@@ -72,12 +74,43 @@ public class ResultsActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnSave = findViewById(R.id.btnSave);
         btnBookAppointment = findViewById(R.id.btnBookAppointment);
+        cardSuggestProfile = findViewById(R.id.cardSuggestProfile);
+        btnGoToProfile = findViewById(R.id.btnGoToProfile);
+        
+        com.google.android.material.button.MaterialButton btnAIChat = findViewById(R.id.btnAIChat);
+        
         viewModel = new ViewModelProvider(this).get(ResultsViewModel.class);
 
         // Back navigation
         btnBack.setOnClickListener(v -> finish());
         btnSave.setOnClickListener(v -> markAnalysisAsSaved());
-        btnBookAppointment.setOnClickListener(v -> UiFeedback.shortMessage(this, R.string.feature_coming_soon));
+        btnGoToProfile.setOnClickListener(v -> {
+            startActivity(new android.content.Intent(this, QuestionnaireActivity.class));
+        });
+        
+        btnAIChat.setOnClickListener(v -> {
+            // Guardar el score en SharedPreferences para que el Fragmento pueda leerlo
+            android.content.SharedPreferences prefs = getSharedPreferences("iaderm_prefs", MODE_PRIVATE);
+            prefs.edit().putInt("latest_score", analysisScore).apply();
+            
+            android.content.Intent intent = new android.content.Intent(this, MainActivity.class);
+            intent.putExtra("OPEN_TAB", R.id.nav_ai_chat);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
+
+        btnBookAppointment.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse("geo:0,0?q=dermatologos+cercanos"));
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                // Fallback to web browser if Maps is not installed
+                intent.setData(android.net.Uri.parse("https://www.google.com/maps/search/dermatologos+cercanos"));
+                startActivity(intent);
+            }
+        });
 
         if (!hasScore) {
             UiFeedback.shortMessage(this, R.string.results_invalid_input);
@@ -86,6 +119,19 @@ public class ResultsActivity extends AppCompatActivity {
         // Populate results
         displayResults(analysisScore, diagnosis, top3Data);
         observeAnalysisRecord();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Check if user has completed the medical profile
+        android.content.SharedPreferences prefs = getSharedPreferences("iaderm_prefs", MODE_PRIVATE);
+        boolean hasProfile = prefs.getBoolean("has_completed_questionnaire", false);
+        if (hasProfile) {
+            cardSuggestProfile.setVisibility(android.view.View.GONE);
+        } else {
+            cardSuggestProfile.setVisibility(android.view.View.VISIBLE);
+        }
     }
 
     private void displayResults(int score, String diag, String top3) {
@@ -97,34 +143,38 @@ public class ResultsActivity extends AppCompatActivity {
         tvScore.setText(getString(R.string.results_score_of, score));
         
         // Update Diagnosis Label
-        tvDiagnosisLabel.setText("Diagnóstico: " + diag);
+        tvDiagnosisLabel.setText("Nivel de " + diag);
 
-        // Populate Top 3
+        // Populate Top 3 and look for Alert
+        String alertMessage = null;
         if (top3 != null && !top3.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             String[] parts = top3.split(";");
-            for (int i = 0; i < parts.length; i++) {
-                String[] pair = parts[i].split(":");
-                if (pair.length == 2) {
-                    sb.append(i + 1).append(". ").append(pair[0]).append(": ").append(pair[1]).append("%");
-                    if (i < parts.length - 1) sb.append("\n");
+            for (String part : parts) {
+                if (part.startsWith("ALERTA:")) {
+                    alertMessage = part;
+                } else {
+                    String[] pair = part.split(":");
+                    if (pair.length == 2) {
+                        sb.append("• ").append(pair[0]).append(": ").append(pair[1]).append("%\n");
+                    }
                 }
             }
-            tvTop3List.setText(sb.toString());
+            tvTop3List.setText("Otros análisis del modelo:\n" + sb.toString().trim());
         } else {
-            tvTop3List.setText("No hay datos disponibles.");
+            tvTop3List.setText("No hay datos adicionales disponibles.");
         }
 
-        // Set Dynamic Description based on Diagnosis
-        if (diag.equals("Piel sana")) {
-            tvResultDescription.setText("El modelo no detectó signos importantes de afecciones dermatológicas. Sigue manteniendo una buena rutina de cuidado de la piel.");
+        // Set Dynamic Description based on Diagnosis & Alert
+        if (alertMessage != null) {
+            tvResultDescription.setText("Compatibilidad con " + diag + ": " + score + "%.\n\n⚠️ " + alertMessage);
+            tvRecommendationList.setText("• Agendar cita médica de inmediato\n• Evitar automedicación bajo cualquier circunstancia\n• Usar protector solar dermatológico\n• Limpieza facial suave");
+        } else if (score < 30) {
+            tvResultDescription.setText("No se detectaron niveles preocupantes de Rosácea. Sigue manteniendo una buena rutina de cuidado de la piel.");
             tvRecommendationList.setText("• Uso diario de protector solar\n• Limpieza suave por la mañana y noche\n• Hidratación constante");
-        } else if (diag.equals("Desconocido")) {
-            tvResultDescription.setText("No se pudo clasificar con precisión. Por favor, toma otra fotografía con mejor iluminación.");
-            tvRecommendationList.setText("• Asegúrate de estar en un lugar bien iluminado\n• Evita sombras fuertes en el rostro\n• Mantén el teléfono estable");
         } else {
-            tvResultDescription.setText("El modelo ha detectado características visuales compatibles con " + diag + " con un grado de confianza de " + score + "%. Este resultado es sugerente y debe ser confirmado por un especialista.");
-            tvRecommendationList.setText("• Agendar cita con un dermatólogo\n• Evitar rascar o irritar la zona afectada\n• Proteger la piel de la exposición solar directa\n• Evitar automedicación");
+            tvResultDescription.setText("El modelo detectó una coincidencia del " + score + "% con características visuales de la Rosácea. Este resultado es sugerente y debe ser confirmado por un especialista.");
+            tvRecommendationList.setText("• Evitar exposición solar directa\n• Buscar a un dermatólogo cercano\n• Evitar estrés y cambios bruscos de temperatura\n• No utilizar productos irritantes");
         }
 
         // 3. Determine severity and set chip
@@ -148,23 +198,26 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void observeAnalysisRecord() {
-        if (analysisId <= 0L) {
-            return;
-        }
+        if (analysisId <= 0) return;
         viewModel.getAnalysisById(analysisId).observe(this, record -> {
-            if (record == null) {
-                return;
-            }
-            currentRecord = record;
-            int dbScore = Math.max(0, Math.min(100, record.score));
-            String dbDiagnosis = (record.diagnosis != null) ? record.diagnosis : diagnosis;
-            String dbTop3 = (record.heatmapData != null && !record.heatmapData.isEmpty()) ? record.heatmapData : top3Data;
-            
-            if (dbScore != analysisScore || !dbDiagnosis.equals(diagnosis) || !dbTop3.equals(top3Data)) {
-                analysisScore = dbScore;
-                diagnosis = dbDiagnosis;
-                top3Data = dbTop3;
-                displayResults(analysisScore, diagnosis, top3Data);
+            if (record != null) {
+                currentRecord = record;
+                displayResults(record.score, record.diagnosis, record.heatmapData);
+                
+                // Cargar la imagen local de forma segura
+                if (record.imagePath != null && !record.imagePath.isEmpty()) {
+                    com.google.android.material.imageview.ShapeableImageView ivPhoto = findViewById(R.id.ivAnalyzedPhoto);
+                    if (ivPhoto != null) {
+                        try {
+                            android.graphics.Bitmap bitmap = android.graphics.BitmapFactory.decodeFile(record.imagePath);
+                            if (bitmap != null) {
+                                ivPhoto.setImageBitmap(bitmap);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         });
     }

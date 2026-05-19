@@ -47,6 +47,7 @@ public class CaptureActivity extends AppCompatActivity {
     private TextView btnCancel;
     private FaceAnalyzer faceAnalyzer;
     private DermatologyClassifier dermatologyClassifier;
+    private View tutorialOverlay;
 
     // Indicator status text views
     private TextView tvLightStatus;
@@ -82,6 +83,7 @@ public class CaptureActivity extends AppCompatActivity {
         btnCambiarCamara = findViewById(R.id.btnCambiarCamara);
         btnFlash = findViewById(R.id.btnFlash);
         btnCancel = findViewById(R.id.btnCancel);
+        tutorialOverlay = findViewById(R.id.tutorialOverlay);
 
         tvLightStatus = findViewById(R.id.tvLightStatus);
         tvDistanceStatus = findViewById(R.id.tvDistanceStatus);
@@ -133,6 +135,20 @@ public class CaptureActivity extends AppCompatActivity {
         });
 
         dermatologyClassifier = new DermatologyClassifier(this);
+
+        // FTU (First Time Use) Tutorial
+        android.content.SharedPreferences prefs = getSharedPreferences("iaderm_prefs", MODE_PRIVATE);
+        if (!prefs.getBoolean("tutorial_capture_shown", false)) {
+            tutorialOverlay.setVisibility(View.VISIBLE);
+            findViewById(R.id.btnEntendidoTutorial).setOnClickListener(v -> {
+                tutorialOverlay.animate()
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(() -> tutorialOverlay.setVisibility(View.GONE))
+                        .start();
+                prefs.edit().putBoolean("tutorial_capture_shown", true).apply();
+            });
+        }
     }
 
     @Override
@@ -272,6 +288,24 @@ public class CaptureActivity extends AppCompatActivity {
     // Capture Action
     // ═══════════════════════════════════════════════════════
 
+    private String saveImageLocally(Bitmap bitmap) {
+        if (bitmap == null) return "";
+        try {
+            java.io.File directory = new java.io.File(getFilesDir(), "iaderm_photos");
+            if (!directory.exists()) directory.mkdirs();
+            String fileName = "scan_" + System.currentTimeMillis() + ".jpg";
+            java.io.File file = new java.io.File(directory, fileName);
+            java.io.FileOutputStream out = new java.io.FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+            return file.getAbsolutePath();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     private void performCapture() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             btnCapturar.performHapticFeedback(HapticFeedbackConstants.CONFIRM);
@@ -298,7 +332,10 @@ public class CaptureActivity extends AppCompatActivity {
         // 1. Capture bitmap from preview
         Bitmap bitmap = previewView.getBitmap();
         
-        // 2. Run inference in background (simulated delay for UI feedback)
+        // 2. Save image locally
+        final String savedImagePath = saveImageLocally(bitmap);
+        
+        // 3. Run inference in background (simulated delay for UI feedback)
         previewView.postDelayed(() -> {
             DermatologyClassifier.ClassificationResult result = (bitmap != null) 
                     ? dermatologyClassifier.classify(bitmap) 
@@ -310,7 +347,7 @@ public class CaptureActivity extends AppCompatActivity {
             final String finalDiagnosis = result.diagnosis;
             final String top3Data = result.top3Data;
 
-            viewModel.performCapture(finalScore, finalDiagnosis, top3Data, id -> runOnUiThread(() -> {
+            viewModel.performCapture(finalScore, finalDiagnosis, top3Data, savedImagePath, id -> runOnUiThread(() -> {
                 if (id <= 0) {
                     UiFeedback.shortMessage(this, R.string.error_analysis_save_failed);
                     AppNavigator.openResults(CaptureActivity.this, finalScore, finalDiagnosis, top3Data);

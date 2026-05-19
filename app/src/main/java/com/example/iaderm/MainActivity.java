@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private final Fragment homeFragment = new HomeFragment();
     private final Fragment historyFragment = new HistoryFragment();
     private final Fragment triggersFragment = new TriggersFragment();
-    private final Fragment profileFragment = new ProfileFragment();
+    private final Fragment aiChatFragment = new AIChatFragment();
     private final FragmentManager fm = getSupportFragmentManager();
     private Fragment activeFragment = homeFragment;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fabAnalyze = findViewById(R.id.fabAnalyze);
 
         // Setup fragments (all added, only home shown)
-        fm.beginTransaction().add(R.id.nav_host_fragment, profileFragment, "4").hide(profileFragment).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment, aiChatFragment, "4").hide(aiChatFragment).commit();
         fm.beginTransaction().add(R.id.nav_host_fragment, triggersFragment, "3").hide(triggersFragment).commit();
         fm.beginTransaction().add(R.id.nav_host_fragment, historyFragment, "2").hide(historyFragment).commit();
         fm.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "1").commit();
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
                 fm.beginTransaction().hide(activeFragment).show(triggersFragment).commit();
                 activeFragment = triggersFragment;
                 return true;
-            } else if (itemId == R.id.nav_profile) {
-                fm.beginTransaction().hide(activeFragment).show(profileFragment).commit();
-                activeFragment = profileFragment;
+            } else if (itemId == R.id.nav_ai_chat) {
+                fm.beginTransaction().hide(activeFragment).show(aiChatFragment).commit();
+                activeFragment = aiChatFragment;
                 return true;
             } else if (itemId == R.id.nav_capture) {
                 AppNavigator.openCapture(this);
@@ -61,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         fabAnalyze.setOnClickListener(v -> AppNavigator.openCapture(this));
+        
+        handleIntent(getIntent());
+    }
+    
+    @Override
+    protected void onNewIntent(android.content.Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent(intent);
+    }
+    
+    private void handleIntent(android.content.Intent intent) {
+        if (intent != null && intent.hasExtra("OPEN_TAB")) {
+            int tabId = intent.getIntExtra("OPEN_TAB", R.id.nav_home);
+            bottomNav.setSelectedItemId(tabId);
+        }
     }
 
     public void switchToTab(int navItemId) {

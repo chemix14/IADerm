@@ -93,7 +93,7 @@ public class CaptureViewModel extends AndroidViewModel {
         }
     }
 
-    public void performCapture(int score, String diagnosis, String top3Data, IADermRepository.OnInsertCallback callback) {
+    public void performCapture(int score, String diagnosis, String top3Data, String imagePath, IADermRepository.OnInsertCallback callback) {
         if (isCapturing) return;
         isCapturing = true;
         updateUiState();
@@ -103,7 +103,7 @@ public class CaptureViewModel extends AndroidViewModel {
         record.score = Math.max(0, Math.min(100, score));
         record.diagnosis = diagnosis;
         record.severity = AnalysisRecord.calculateSeverity(record.score);
-        record.imagePath = "";
+        record.imagePath = imagePath != null ? imagePath : "";
         record.heatmapData = top3Data;
         record.notes = "";
 

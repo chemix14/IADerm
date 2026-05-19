@@ -74,6 +74,17 @@
             android:exported="false"
             android:theme="@style/Theme.IADerm" />
 
+        <activity
+            android:name=".QuestionnaireActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm" />
+
+        <activity
+            android:name=".AIChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IADerm"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- FileProvider for sharing PDF reports -->
         <provider
             android:name="androidx.core.content.FileProvider"

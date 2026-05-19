@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:elevation="0dp">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Perfil Clínico"
+            app:titleCentered="true"
+            app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ayúdanos a entender tu piel"
+                android:textAppearance="@style/TextAppearance.IADerm.Headline"
+                android:layout_marginBottom="8dp" />
+                
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esta información clínica es estrictamente privada y nos ayuda a generar recomendaciones y diagnósticos mucho más precisos junto con tu fotografía."
+                android:textAppearance="@style/TextAppearance.IADerm.Body"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Question 1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Hace cuánto tiempo notas estas rojeces o lesiones?"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+                <RadioButton android:id="@+id/rbDurDays" android:text="Días o un par de semanas" />
+                <RadioButton android:id="@+id/rbDurMonths" android:text="Meses" />
+                <RadioButton android:id="@+id/rbDurYears" android:text="Años (Es un problema crónico)" />
+            </RadioGroup>
+
+            <!-- Question 2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Sientes dolor, picazón o sensación de ardor en el rostro?"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgSymptoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+                <RadioButton android:id="@+id/rbSymNone" android:text="No, es puramente estético" />
+                <RadioButton android:id="@+id/rbSymItch" android:text="Picazón o resequedad ocasional" />
+                <RadioButton android:id="@+id/rbSymBurn" android:text="Sensación de calor, ardor o sensibilidad extrema" />
+            </RadioGroup>
+            
+            <!-- Question 3 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Notas que empeora con algo en particular? (Elige el principal)"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgTriggers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+                <RadioButton android:id="@+id/rbTrigSun" android:text="Exposición al Sol o al Calor" />
+                <RadioButton android:id="@+id/rbTrigStress" android:text="Estrés, ansiedad o emociones fuertes" />
+                <RadioButton android:id="@+id/rbTrigFood" android:text="Comida picante, Bebidas calientes o Alcohol" />
+                <RadioButton android:id="@+id/rbTrigUnknown" android:text="Aún no estoy seguro / Otro motivo" />
+            </RadioGroup>
+            
+            <!-- Question 4 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Has utilizado algún tratamiento recientemente?"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgTreatments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+                <RadioButton android:id="@+id/rbTreatNone" android:text="No, ninguno" />
+                <RadioButton android:id="@+id/rbTreatHome" android:text="Remedios caseros o cremas cosméticas comunes" />
+                <RadioButton android:id="@+id/rbTreatMedical" android:text="Cremas recetadas (esteroides) o antibióticos" />
+            </RadioGroup>
+
+            <!-- Question 5 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Cómo reacciona tu piel al sol?"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgSkinType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+                <RadioButton android:id="@+id/rbSkinFair" android:text="Me quemo siempre, nunca me bronceo" />
+                <RadioButton android:id="@+id/rbSkinMedium" android:text="Me quemo a veces, pero me bronceo gradualmente" />
+                <RadioButton android:id="@+id/rbSkinDark" android:text="Rara vez me quemo, me bronceo con facilidad" />
+            </RadioGroup>
+
+            <!-- Question 6 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Tienes alguna alergia en la piel conocida?"
+                android:textAppearance="@style/TextAppearance.IADerm.Label" />
+            <RadioGroup
+                android:id="@+id/rgAllergies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp">
+                <RadioButton android:id="@+id/rbAllergyNone" android:text="No, ninguna alergia conocida" />
+                <RadioButton android:id="@+id/rbAllergyCosmetics" android:text="Soy alérgico/a a ciertos cosméticos o fragancias" />
+                <RadioButton android:id="@+id/rbAllergyMeds" android:text="Soy alérgico/a a medicamentos (ej. antibióticos)" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveProfile"
+                style="@style/Widget.IADerm.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar Perfil"
+                android:padding="16dp" />
+                
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

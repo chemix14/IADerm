@@ -1,0 +1,379 @@
+import torch
+import os
+import numpy as np
+import glob
+import warnings
+import transformers
+
+warnings.filterwarnings("ignore")
+transformers.logging.set_verbosity_error()
+
+from datasets import load_dataset, concatenate_datasets, Image as DatasetsImage, ClassLabel, Features, Value
+from transformers import (
+    AutoImageProcessor,
+    AutoModelForImageClassification,
+    TrainingArguments,
+    Trainer
+)
+from torchvision.transforms import (
+    RandomResizedCrop, RandomHorizontalFlip,
+    ColorJitter, Compose, Normalize, ToTensor,
+    Resize, CenterCrop
+)
+
+# ==========================================
+# 1. CONFIGURACIÓN
+# ==========================================
+RUTA_CARPETAS = "/home/seven/datasets_remotos/caras"
+RUTA_TRAIN    = "/home/seven/datasets_remotos/trains"
+RUTA_VAL      = "/home/seven/datasets_remotos/validations"
+RUTA_TEST     = "/home/seven/datasets_remotos/test"
+MODELO_ID     = "apple/mobilevit-small"
+
+# Columna real del diagnóstico en los .parquet
+COL_LABEL_PARQUET = "dx"   # ← ajusta si es diferente
+
+PADECIMIENTOS = {
+    "1":  "Acné",
+    "2":  "Melasma",
+    "3":  "Rosácea",
+    "4":  "Manchas solares",
+    "5":  "Vitíligo",
+    "6":  "Dermatitis seborreica",
+    "7":  "Hiperpigmentación",
+    "8":  "Psoriasis",
+    "9":  "Eccema",
+    "10": "Queratosis actínica",
+    "11": "Lentigos",
+    "12": "Cloasma",
+    "13": "Nevus (lunares)",
+    "14": "Eritema",
+    "15": "Piel sana",
+}
+
+# ==========================================
+# 2. UTILIDADES
+# ==========================================
+def preparar_parquet(ds, nombre):
+    """
+    Para datasets .parquet:
+    - Conserva solo columnas 'image' y la col de diagnóstico
+    - Convierte el label a entero usando label2id global
+    - Devuelve dataset con columnas ['image', 'label'] donde label es int
+    """
+    print(f"   🔍 {nombre} — columnas: {ds.column_names}")
+
+    # Verificar que existe la columna de diagnóstico
+    if COL_LABEL_PARQUET not in ds.column_names:
+        print(f"   ⚠️  Columna '{COL_LABEL_PARQUET}' no encontrada en {nombre}")
+        print(f"   💡 Columnas disponibles: {ds.column_names}")
+        raise KeyError(f"Columna '{COL_LABEL_PARQUET}' no existe. Ajusta COL_LABEL_PARQUET en la config.")
+
+    # Mostrar valores únicos del label para diagnóstico
+    valores_unicos = list(set(ds[COL_LABEL_PARQUET]))
+    print(f"   📊 {nombre} — valores únicos en '{COL_LABEL_PARQUET}': {sorted(valores_unicos)}")
+
+    # Conservar solo image + label col, eliminar el resto
+    cols_a_eliminar = [c for c in ds.column_names if c not in ["image", COL_LABEL_PARQUET]]
+    ds = ds.remove_columns(cols_a_eliminar)
+
+    # Renombrar col de diagnóstico a 'label_str' temporalmente
+    if COL_LABEL_PARQUET != "label_str":
+        ds = ds.rename_column(COL_LABEL_PARQUET, "label_str")
+
+    ds = ds.cast_column("image", DatasetsImage())
+    print(f"   ✅ {nombre}: {len(ds)} imágenes listas")
+    return ds
+
+def preparar_carpetas(ds, nombre):
+    """Para datasets imagefolder: ya tiene 'image' y 'label' como ClassLabel."""
+    print(f"   🔍 {nombre} — columnas: {ds.column_names}")
+    ds = ds.cast_column("image", DatasetsImage())
+
+    # Extraer nombres de clases y convertir a string
+    etiquetas_raw = ds.features["label"].names
+    print(f"   📊 {nombre} — clases: {etiquetas_raw}")
+
+    # Convertir label ClassLabel → string para unificar con parquet
+    def label_a_str(x):
+        x["label_str"] = etiquetas_raw[x["label"]]
+        return x
+
+    ds = ds.map(label_a_str, remove_columns=["label"])
+    print(f"   ✅ {nombre}: {len(ds)} imágenes listas")
+    return ds
+
+def cargar_split(ruta, nombre, es_parquet=True):
+    if not os.path.exists(ruta):
+        print(f"   ⚠️  Ruta no encontrada: {ruta}")
+        return None
+
+    parquets = glob.glob(os.path.join(ruta, "**/*.parquet"), recursive=True)
+    fmt = "parquet" if parquets else "imagefolder"
+
+    info = load_dataset(fmt, data_dir=ruta)
+    splits_disponibles = list(info.keys())
+    print(f"\n   📂 {nombre}: splits → {splits_disponibles}")
+
+    split_elegido = splits_disponibles[0]
+    ds = info[split_elegido]
+
+    if fmt == "parquet":
+        ds = preparar_parquet(ds, nombre)
+    else:
+        ds = preparar_carpetas(ds, nombre)
+
+    return ds
+
+# ==========================================
+# 3. CARGA
+# ==========================================
+print("\n📦 Cargando datasets...")
+ds_train_pq = cargar_split(RUTA_TRAIN, "parquet/train")
+ds_val_pq   = cargar_split(RUTA_VAL,   "parquet/val")
+ds_test_pq  = cargar_split(RUTA_TEST,  "parquet/test")
+
+print(f"\n🗂️  Cargando carpetas: {RUTA_CARPETAS}")
+ds_carpetas_info  = load_dataset("imagefolder", data_dir=RUTA_CARPETAS)
+ds_carpetas_raw   = ds_carpetas_info[list(ds_carpetas_info.keys())[0]]
+ds_carpetas_prep  = preparar_carpetas(ds_carpetas_raw, "carpetas")
+split_carpetas    = ds_carpetas_prep.train_test_split(test_size=0.2, seed=42)
+ds_carpetas_train = split_carpetas["train"]
+ds_carpetas_val   = split_carpetas["test"]
+print(f"   carpetas/train: {len(ds_carpetas_train)} | carpetas/val: {len(ds_carpetas_val)}")
+
+# ==========================================
+# 4. UNIFICAR ETIQUETAS EN TODOS LOS DATASETS
+# ==========================================
+# Recolectamos TODOS los valores únicos de label_str de todos los datasets
+print("\n🔀 Unificando etiquetas...")
+todos_los_labels = set()
+for ds in [ds_train_pq, ds_val_pq, ds_test_pq, ds_carpetas_train, ds_carpetas_val]:
+    if ds is not None:
+        todos_los_labels.update(ds["label_str"])
+
+etiquetas = sorted(list(todos_los_labels))
+label2id  = {e: i for i, e in enumerate(etiquetas)}
+id2label  = {i: e for i, e in enumerate(etiquetas)}
+print(f"   🏷️  Clases unificadas ({len(etiquetas)}): {etiquetas}")
+
+# Convertimos label_str → int en todos los datasets
+def str_a_int(batch):
+    batch["label"] = [label2id[s] for s in batch["label_str"]]
+    return batch
+
+def convertir_labels(ds, nombre):
+    if ds is None:
+        return None
+    # Filtrar filas con label_str None o vacío
+    ds = ds.filter(lambda x: x["label_str"] is not None and x["image"] is not None)
+    ds = ds.map(str_a_int, batched=True, remove_columns=["label_str"])
+    print(f"   ✅ {nombre}: {len(ds)} imágenes con labels convertidos")
+    return ds
+
+ds_train_pq       = convertir_labels(ds_train_pq,       "parquet/train")
+ds_val_pq         = convertir_labels(ds_val_pq,         "parquet/val")
+ds_test_pq        = convertir_labels(ds_test_pq,        "parquet/test")
+ds_carpetas_train = convertir_labels(ds_carpetas_train, "carpetas/train")
+ds_carpetas_val   = convertir_labels(ds_carpetas_val,   "carpetas/val")
+
+# Ahora todos tienen columnas ['image', 'label'] con label como int → concatenamos sin problemas
+def combinar(*datasets):
+    disponibles = [d for d in datasets if d is not None]
+    if len(disponibles) == 1:
+        return disponibles[0]
+    return concatenate_datasets(disponibles)
+
+train_ds = combinar(ds_train_pq, ds_carpetas_train)
+val_ds   = combinar(ds_val_pq,   ds_carpetas_val)
+test_ds  = ds_test_pq
+
+print(f"\n📊 Dataset final combinado:")
+print(f"   Train : {len(train_ds):>6} imágenes")
+print(f"   Val   : {len(val_ds):>6} imágenes")
+if test_ds is not None:
+    print(f"   Test  : {len(test_ds):>6} imágenes")
+
+# ==========================================
+# 5. PREPROCESAMIENTO
+# ==========================================
+image_processor = AutoImageProcessor.from_pretrained(MODELO_ID)
+size = image_processor.size.get("shortest_edge", 224)
+
+train_transforms = Compose([
+    RandomResizedCrop(size),
+    RandomHorizontalFlip(),
+    ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3),
+    ToTensor(),
+    Normalize(mean=image_processor.image_mean, std=image_processor.image_std),
+])
+val_transforms = Compose([
+    Resize(size),
+    CenterCrop(size),
+    ToTensor(),
+    Normalize(mean=image_processor.image_mean, std=image_processor.image_std),
+])
+
+train_ds.set_transform(lambda b: {**b, "pixel_values": [train_transforms(i.convert("RGB")) for i in b["image"]]})
+val_ds.set_transform(  lambda b: {**b, "pixel_values": [val_transforms(i.convert("RGB"))   for i in b["image"]]})
+if test_ds is not None:
+    test_ds.set_transform(lambda b: {**b, "pixel_values": [val_transforms(i.convert("RGB")) for i in b["image"]]})
+
+# ==========================================
+# 6. MODELO
+# ==========================================
+modelo = AutoModelForImageClassification.from_pretrained(
+    MODELO_ID,
+    num_labels=len(etiquetas),
+    id2label=id2label,
+    label2id=label2id,
+    ignore_mismatched_sizes=True
+)
+
+for name, param in modelo.named_parameters():
+    if "classifier" not in name:
+        param.requires_grad = False
+print("\n🔒 Backbone congelado para Fase 1")
+
+# ==========================================
+# 7. ENTRENAMIENTO EN 2 FASES
+# ==========================================
+def collate_fn(batch):
+    batch = [x for x in batch if x.get("label") is not None and x.get("pixel_values") is not None]
+    return {
+        'pixel_values': torch.stack([x['pixel_values'] for x in batch]),
+        'labels': torch.tensor([x["label"] for x in batch], dtype=torch.long)
+    }
+
+compute_metrics = lambda p: {
+    "accuracy": (np.argmax(p.predictions, axis=1) == p.label_ids).mean()
+}
+
+# ── FASE 1 ──
+print("\n🔵 FASE 1: Calentando clasificador (3 épocas)...")
+trainer = Trainer(
+    model=modelo,
+    args=TrainingArguments(
+        output_dir="./fase1",
+        remove_unused_columns=False,
+        eval_strategy="epoch",
+        save_strategy="epoch",
+        learning_rate=1e-3,
+        per_device_train_batch_size=4,
+        gradient_accumulation_steps=8,
+        fp16=True,
+        num_train_epochs=3,
+        load_best_model_at_end=True,
+        metric_for_best_model="accuracy",
+        logging_steps=20,
+        save_total_limit=1,
+    ),
+    data_collator=collate_fn,
+    train_dataset=train_ds,
+    eval_dataset=val_ds,
+    compute_metrics=compute_metrics,
+)
+torch.cuda.empty_cache()
+trainer.train()
+
+# ── FASE 2 ──
+print("\n🟢 FASE 2: Fine-tuning completo (15 épocas)...")
+for param in modelo.parameters():
+    param.requires_grad = True
+
+trainer = Trainer(
+    model=modelo,
+    args=TrainingArguments(
+        output_dir="./resultados_caras",
+        remove_unused_columns=False,
+        eval_strategy="epoch",
+        save_strategy="epoch",
+        learning_rate=2e-5,
+        per_device_train_batch_size=2,
+        gradient_accumulation_steps=16,
+        fp16=True,
+        gradient_checkpointing=True,
+        num_train_epochs=15,
+        load_best_model_at_end=True,
+        metric_for_best_model="accuracy",
+        logging_steps=20,
+        save_total_limit=2,
+        warmup_ratio=0.1,
+        weight_decay=0.01,
+    ),
+    data_collator=collate_fn,
+    train_dataset=train_ds,
+    eval_dataset=val_ds,
+    compute_metrics=compute_metrics,
+)
+trainer.train()
+
+# ==========================================
+# 8. DIAGNÓSTICO FINAL
+# ==========================================
+print("\n" + "="*65)
+print("📋  DIAGNÓSTICO — DETECCIÓN DE MANCHAS Y PADECIMIENTOS")
+print("="*65)
+
+modelo.to("cuda").eval()
+
+if test_ds is not None:
+    ds_para_eval = test_ds
+    fuente = "Test (parquet)"
+else:
+    ds_para_eval = ds_carpetas_val
+    fuente = "Validación (carpetas)"
+
+# Quitamos transforms para evaluación directa
+ds_para_eval = ds_para_eval.cast_column("image", DatasetsImage())
+print(f"🔎 Evaluando sobre: {fuente} ({len(ds_para_eval)} imágenes)\n")
+
+correctas = 0
+n_eval    = min(20, len(ds_para_eval))
+
+for i in range(n_eval):
+    item = ds_para_eval[i]
+    if item.get("label") is None or item.get("image") is None:
+        print(f"⚠️  Imagen {i:02d}: datos incompletos, omitida")
+        continue
+
+    img_pil = item["image"].convert("RGB")
+    inputs  = image_processor(img_pil, return_tensors="pt").to("cuda")
+
+    with torch.no_grad():
+        logits    = modelo(**inputs).logits
+        probs     = torch.softmax(logits, dim=-1)[0]
+        pred_idx  = probs.argmax().item()
+        confianza = probs[pred_idx].item()
+        top3_idx  = probs.topk(3).indices.tolist()
+        top3_vals = probs.topk(3).values.tolist()
+
+    nombre_real = etiquetas[item["label"]]
+    nombre_pred = id2label[pred_idx]
+    padec_real  = PADECIMIENTOS.get(nombre_real, nombre_real)
+    padec_pred  = PADECIMIENTOS.get(nombre_pred, nombre_pred)
+    correcto    = nombre_real == nombre_pred
+    if correcto:
+        correctas += 1
+
+    check = "✅" if correcto else "❌"
+    nivel = "🟢 Alta" if confianza > 0.6 else "🟡 Media" if confianza > 0.35 else "🔴 Baja"
+
+    print(f"{check} Imagen {i:02d} {'─'*45}")
+    print(f"   🏷️  Real      : {padec_real} ({nombre_real})")
+    print(f"   🤖 Predicción : {padec_pred} ({nombre_pred})")
+    print(f"   📊 Confianza  : {confianza:.1%}  {nivel}")
+    print(f"   🔢 Top-3 diagnósticos:")
+    for rank, (idx, prob) in enumerate(zip(top3_idx, top3_vals), 1):
+        etq   = id2label[idx]
+        padec = PADECIMIENTOS.get(etq, etq)
+        barra = "█" * int(prob * 40)
+        print(f"      {rank}. {barra:<40} {prob:.1%} → {padec}")
+    print()
+
+print("="*65)
+print(f"🎯 Precisión final: {correctas}/{n_eval} = {correctas/n_eval:.1%}")
+print("="*65)
+
+trainer.save_model("./modelo_final_caras")
+print("\n✅ Modelo guardado en ./modelo_final_caras")

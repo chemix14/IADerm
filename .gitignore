@@ -14,3 +14,13 @@
 .cxx
 local.properties
 recursos_desarrollo/
+
+# Large datasets and models
+datasets_remotos/
+modelo_final_caras/
+model.onnx.data
+temp_tflite_output/
+
+# IDE/Editor/Local files
+.vscode/
+*.onnx

@@ -284,4 +284,74 @@
         app:menu="@menu/bottom_nav_menu"
         style="@style/Widget.IADerm.BottomNav" />
 
+    <!-- Layer 7: Tutorial Overlay (Home) -->
+    <FrameLayout
+        android:id="@+id/tutorialOverlayHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DD000000"
+        android:elevation="30dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👋"
+                android:textSize="64sp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Te damos la bienvenida!"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usa el botón inferior para realizar tu primer análisis de piel.\n\nAquí en el panel principal verás tus resultados recientes y consejos personalizados."
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:gravity="center"
+                android:layout_marginBottom="32dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEntendidoHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Empezar!"
+                app:cornerRadius="24dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
+        </LinearLayout>
+        
+        <!-- Animated arrow pointing down to the FAB -->
+        <TextView
+            android:id="@+id/tvTutorialArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⬇️"
+            android:textSize="48sp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="160dp" />
+    </FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

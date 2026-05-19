@@ -55,6 +55,72 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <!-- Suggestion to complete medical profile (Will be hidden if already done) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSuggestProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.IADerm.Card"
+                app:cardBackgroundColor="@color/tertiary_container"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📝 Mejora tu diagnóstico"
+                        android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_tertiary_container"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Completa tu perfil clínico en 1 minuto para que nuestra IA especializada entienda tu contexto y te brinde recomendaciones exactas."
+                        android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                        android:textColor="@color/on_tertiary_container"
+                        android:layout_marginBottom="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGoToProfile"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Completar Perfil" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- User Analyzed Image -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+                
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAnalyzedPhoto"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                    android:background="@color/surface_variant" />
+                    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔒 Procesado localmente. 100% Privado."
+                    android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                    android:textColor="@color/success"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
             <!-- Score Circular Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -184,13 +250,22 @@
                         tools:text="- Usar protector solar\n- Hidratar la piel" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAIChat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hablar con Asistente IA"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_marginTop="20dp"
+                        app:icon="@android:drawable/stat_notify_chat" />
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnBookAppointment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/results_book_appointment"
+                        android:text="Encuentra a un especialista"
                         style="@style/Widget.IADerm.Button.Primary"
-                        android:layout_marginTop="20dp"
-                        app:icon="@android:drawable/ic_menu_day" />
+                        android:layout_marginTop="12dp"
+                        app:icon="@android:drawable/ic_menu_mapmode" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

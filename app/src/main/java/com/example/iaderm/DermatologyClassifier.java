@@ -102,7 +102,28 @@ public class DermatologyClassifier {
         for (int i = 0; i < indices.length; i++) indices[i] = i;
         Arrays.sort(indices, (a, b) -> Float.compare(probabilities[b], probabilities[a]));
 
+        // Focus purely on Rosacea (index 13)
+        int rosaceaIndex = 13;
+        int rosaceaScore = (int) (probabilities[rosaceaIndex] * 100);
+
+        // Check if there is another condition with high probability (>40%)
+        int highestOtherIndex = -1;
+        float highestOtherProb = 0f;
+        for (int i = 0; i < probabilities.length; i++) {
+            if (i == 13 || i == 10) continue; // Skip Rosacea and Healthy Skin
+            if (probabilities[i] > highestOtherProb) {
+                highestOtherProb = probabilities[i];
+                highestOtherIndex = i;
+            }
+        }
+
         StringBuilder top3Builder = new StringBuilder();
+        if (highestOtherProb >= 0.40f) {
+            top3Builder.append("ALERTA: Hemos detectado posibles indicios de ").append(PADECIMIENTOS[highestOtherIndex])
+                       .append(" (Seguridad: ").append((int)(highestOtherProb * 100))
+                       .append("%). Consulta a un dermatólogo para obtener un diagnóstico certero.;");
+        }
+
         for (int i = 0; i < 3; i++) {
             int idx = indices[i];
             top3Builder.append(PADECIMIENTOS[idx]).append(":")
@@ -110,10 +131,7 @@ public class DermatologyClassifier {
             if (i < 2) top3Builder.append(";");
         }
 
-        String diagnosis = PADECIMIENTOS[indices[0]];
-        int score = (int) (probabilities[indices[0]] * 100);
-
-        return new ClassificationResult(diagnosis, score, top3Builder.toString());
+        return new ClassificationResult("Rosácea", rosaceaScore, top3Builder.toString());
     }
 
     private float[] softmax(float[] logits) {

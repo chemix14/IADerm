@@ -44,6 +44,8 @@ public class HomeActivity extends AppCompatActivity {
     private MaterialButton btnViewDetails;
     private HomeViewModel viewModel;
     private AnalysisRecord latestRecord;
+    private View tutorialOverlayHome;
+    private View tvTutorialArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         progressScore = findViewById(R.id.progressScore);
         viewSeverityDot = findViewById(R.id.viewSeverityDot);
         btnViewDetails = findViewById(R.id.btnViewDetails);
+        tutorialOverlayHome = findViewById(R.id.tutorialOverlayHome);
+        tvTutorialArrow = findViewById(R.id.tvTutorialArrow);
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         // Set greeting based on time of day
@@ -117,6 +121,31 @@ public class HomeActivity extends AppCompatActivity {
         // Entrance animations for cards
         animateCardsEntrance();
         observeLatestAnalysis();
+
+        // FTU (First Time Use) Tutorial for Home
+        android.content.SharedPreferences prefs = getSharedPreferences("iaderm_prefs", MODE_PRIVATE);
+        if (!prefs.getBoolean("tutorial_home_shown", false)) {
+            tutorialOverlayHome.setVisibility(View.VISIBLE);
+            
+            // Arrow bounce animation
+            android.animation.ObjectAnimator bounceAnim = android.animation.ObjectAnimator.ofFloat(tvTutorialArrow, "translationY", 0f, 40f);
+            bounceAnim.setDuration(600);
+            bounceAnim.setRepeatMode(android.animation.ValueAnimator.REVERSE);
+            bounceAnim.setRepeatCount(android.animation.ValueAnimator.INFINITE);
+            bounceAnim.start();
+
+            findViewById(R.id.btnEntendidoHome).setOnClickListener(v -> {
+                tutorialOverlayHome.animate()
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(() -> {
+                            tutorialOverlayHome.setVisibility(View.GONE);
+                            bounceAnim.cancel();
+                        })
+                        .start();
+                prefs.edit().putBoolean("tutorial_home_shown", true).apply();
+            });
+        }
     }
 
     /**
