@@ -31,6 +31,9 @@
     <color name="warning">#E8A838</color>
 
     <!-- Severity Mapping -->
+    <color name="severity_mild">#2D9F6F</color>
+    <color name="severity_moderate">#E8A838</color>
+    <color name="severity_severe">#BA1A1A</color>
     <color name="severity_mild_bg">#CDE7EE</color>
     <color name="severity_mild_text">#001F26</color>
     <color name="severity_moderate_bg">#FFE08D</color>

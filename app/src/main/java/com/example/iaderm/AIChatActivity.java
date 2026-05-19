@@ -41,7 +41,7 @@ public class AIChatActivity extends AppCompatActivity {
     
     // API CONFIGURATION
     private static final String API_KEY = BuildConfig.GEMINI_API_KEY;
-    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
+    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
     
     // Conversation History
     private final JSONArray conversationHistory = new JSONArray();
@@ -106,7 +106,6 @@ public class AIChatActivity extends AppCompatActivity {
             sysParts.put("text", sysText);
             
             JSONObject systemInstruction = new JSONObject();
-            systemInstruction.put("role", "system"); // or just direct depending on api version, but standard is system
             systemInstruction.put("parts", new JSONArray().put(sysParts));
             
             requestBody.put("systemInstruction", systemInstruction);

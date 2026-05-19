@@ -65,6 +65,10 @@ public class TriggersViewModel extends AndroidViewModel {
         saveSuccess.setValue(null);
     }
 
+    public void deleteTrigger(TriggerRecord record) {
+        executorService.execute(() -> triggerDao.delete(record));
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();

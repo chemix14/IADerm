@@ -40,18 +40,22 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.nav_home) {
                 fm.beginTransaction().hide(activeFragment).show(homeFragment).commit();
                 activeFragment = homeFragment;
+                fabAnalyze.show();
                 return true;
             } else if (itemId == R.id.nav_history) {
                 fm.beginTransaction().hide(activeFragment).show(historyFragment).commit();
                 activeFragment = historyFragment;
+                fabAnalyze.show();
                 return true;
             } else if (itemId == R.id.nav_triggers) {
                 fm.beginTransaction().hide(activeFragment).show(triggersFragment).commit();
                 activeFragment = triggersFragment;
+                fabAnalyze.show();
                 return true;
             } else if (itemId == R.id.nav_ai_chat) {
                 fm.beginTransaction().hide(activeFragment).show(aiChatFragment).commit();
                 activeFragment = aiChatFragment;
+                fabAnalyze.hide();
                 return true;
             } else if (itemId == R.id.nav_capture) {
                 AppNavigator.openCapture(this);

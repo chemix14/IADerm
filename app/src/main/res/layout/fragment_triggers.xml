@@ -17,13 +17,22 @@
             android:layout_height="wrap_content"
             android:text="@string/title_triggers"
             android:textAppearance="@style/TextAppearance.IADerm.Headline"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registra qué factores afectan tu piel para identificar patrones."
+            android:textSize="14sp"
+            android:textColor="@color/on_surface_variant"
             android:layout_marginBottom="24dp" />
 
+        <!-- Trigger Type Selection -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.IADerm.Card"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.IADerm.Card"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,13 +173,84 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Notes Input -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.IADerm.Card"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triggers_notes_label"
+                    android:textAppearance="@style/TextAppearance.IADerm.Label"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNotes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/triggers_notes_hint"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:minLines="2" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Save Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSaveTrigger"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/trigger_save"
             style="@style/Widget.IADerm.Button.Primary"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- History Section Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Historial de registros"
+            android:textAppearance="@style/TextAppearance.IADerm.Headline"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Empty History Placeholder -->
+        <TextView
+            android:id="@+id/tvEmptyHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aún no tienes registros. Guarda tu primer desencadenante para comenzar tu bitácora."
+            android:textSize="14sp"
+            android:textColor="@color/on_surface_variant"
+            android:textAlignment="center"
+            android:padding="24dp"
+            android:visibility="visible" />
+
+        <!-- Dynamic History Cards Container -->
+        <LinearLayout
+            android:id="@+id/triggerHistoryContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

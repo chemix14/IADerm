@@ -45,9 +45,9 @@ public class AIChatFragment extends Fragment {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
     
-    // API CONFIGURATION (Actualizado a Gemini 3.0 Flash)
+    // API CONFIGURATION
     private static final String API_KEY = BuildConfig.GEMINI_API_KEY;
-    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-flash:generateContent?key=" + API_KEY;
+    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
     
     // Conversation History
     private final JSONArray conversationHistory = new JSONArray();
@@ -73,7 +73,7 @@ public class AIChatFragment extends Fragment {
         });
         
         if (isFirstMessage) {
-            showBotMessage("Hola, soy tu asistente dermatológico (Gemini 3.0). He analizado tu perfil clínico y los resultados de tu escaneo. ¿En qué puedo ayudarte?");
+            showBotMessage("Hola, soy tu asistente dermatológico con IA. He analizado tu perfil clínico y los resultados de tu escaneo. ¿En qué puedo ayudarte?");
             isFirstMessage = false;
         }
 
@@ -105,7 +105,7 @@ public class AIChatFragment extends Fragment {
             JSONObject requestBody = new JSONObject();
             requestBody.put("contents", conversationHistory);
             
-            String sysText = "Eres un asistente de dermatología extremadamente experto y compasivo, basado en el modelo Gemini 3.0 de Google. NO ERES MÉDICO. " +
+            String sysText = "Eres un asistente de dermatología extremadamente experto y compasivo. NO ERES MÉDICO. " +
                              "El usuario tiene un perfil clínico que debes considerar: " + userMedicalProfileJSON + ". " +
                              "Tu objetivo es explicar, educar y empatizar. " +
                              "REGLA CRÍTICA INQUEBRANTABLE: SIEMPRE recomienda consultar a un dermatólogo y BAJO NINGUNA CIRCUNSTANCIA recetes medicamentos.";
@@ -114,7 +114,6 @@ public class AIChatFragment extends Fragment {
             sysParts.put("text", sysText);
             
             JSONObject systemInstruction = new JSONObject();
-            systemInstruction.put("role", "system");
             systemInstruction.put("parts", new JSONArray().put(sysParts));
             
             requestBody.put("systemInstruction", systemInstruction);

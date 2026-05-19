@@ -233,6 +233,8 @@
             android:alpha="0.4"
             android:contentDescription="@string/cd_capture_button" />
 
+    </LinearLayout>
+
     <!-- Layer 6: Tutorial Overlay (First Time Use) -->
     <FrameLayout
         android:id="@+id/tutorialOverlay"

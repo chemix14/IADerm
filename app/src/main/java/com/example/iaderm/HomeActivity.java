@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
             } else if (itemId == R.id.nav_triggers) {
                 AppNavigator.openTriggers(this);
                 return true;
-            } else if (itemId == R.id.nav_profile) {
+            } else if (itemId == R.id.nav_ai_chat) {
                 UiFeedback.shortMessage(this, R.string.feature_coming_soon);
                 return true;
             }
