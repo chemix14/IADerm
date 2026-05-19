@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.Calendar;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class HomeFragment extends Fragment {
@@ -31,6 +32,8 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressScore;
     private View viewSeverityDot;
     private MaterialButton btnViewDetails;
+    private TextView tvTipContent;
+    private TextView tvTipCategory;
     private HomeViewModel viewModel;
     private AnalysisRecord latestRecord;
 
@@ -49,12 +52,15 @@ public class HomeFragment extends Fragment {
         progressScore = view.findViewById(R.id.progressScore);
         viewSeverityDot = view.findViewById(R.id.viewSeverityDot);
         btnViewDetails = view.findViewById(R.id.btnViewDetails);
+        tvTipContent = view.findViewById(R.id.tvTipContent);
+        tvTipCategory = view.findViewById(R.id.tvTipCategory);
 
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         setTimeBasedGreeting();
+        loadRandomTip();
 
-        // Quick action cards (Note: for true tabs, these could switch the tab in MainActivity)
+        // Quick action cards
         cardHistory.setOnClickListener(v -> {
             if (getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).switchToTab(R.id.nav_history);
@@ -77,6 +83,12 @@ public class HomeFragment extends Fragment {
         cardLastAnalysis.setOnClickListener(openDetails);
         btnViewDetails.setOnClickListener(openDetails);
 
+        // Tap tip card to load another random tip
+        View cardTip = view.findViewById(R.id.cardTip);
+        if (cardTip != null) {
+            cardTip.setOnClickListener(v -> loadRandomTip());
+        }
+
         observeLatestAnalysis();
 
         return view;
@@ -90,6 +102,35 @@ public class HomeFragment extends Fragment {
             tvGreeting.setText(R.string.home_greeting_afternoon);
         } else {
             tvGreeting.setText(R.string.home_greeting_evening);
+        }
+    }
+
+    private void loadRandomTip() {
+        if (getContext() == null) return;
+        String[] tips = getResources().getStringArray(R.array.rosacea_tips);
+        if (tips.length > 0) {
+            int index = new Random().nextInt(tips.length);
+            String tip = tips[index];
+            tvTipContent.setText(tip);
+
+            // Determine category based on index range
+            String category;
+            if (index < 15) category = "☀️ Protección Solar";
+            else if (index < 30) category = "🍎 Alimentación";
+            else if (index < 50) category = "🧴 Cuidado de Piel";
+            else if (index < 65) category = "🧠 Bienestar";
+            else if (index < 75) category = "🏃 Ejercicio";
+            else if (index < 90) category = "🌡️ Clima y Ambiente";
+            else if (index < 100) category = "💄 Maquillaje";
+            else category = "🩺 Salud General";
+
+            if (tvTipCategory != null) {
+                tvTipCategory.setText(category);
+            }
+
+            // Subtle animation
+            tvTipContent.setAlpha(0f);
+            tvTipContent.animate().alpha(1f).setDuration(400).start();
         }
     }
 

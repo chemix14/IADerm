@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rosacea_tips">
+        <!-- Protección Solar (1-15) -->
+        <item>El protector solar SPF 30+ reduce la frecuencia de brotes de rojez hasta un 40%. Aplícalo diariamente incluso en días nublados.</item>
+        <item>Usa protector solar mineral (óxido de zinc o dióxido de titanio). Son menos irritantes que los químicos para pieles sensibles.</item>
+        <item>Reaplica tu protector solar cada 2 horas si estás al aire libre, especialmente entre las 10 am y 4 pm.</item>
+        <item>Los sombreros de ala ancha pueden reducir la exposición UV en el rostro hasta un 50%. Combínalos con protector solar.</item>
+        <item>Las gafas de sol protegen la delicada zona ocular, que es especialmente vulnerable en personas con rosácea ocular.</item>
+        <item>Busca protectores solares con niacinamida añadida: protegen del sol y además fortalecen la barrera cutánea.</item>
+        <item>El sol es el desencadenante #1 de brotes de rosácea. Planifica actividades al aire libre fuera de las horas pico de radiación UV.</item>
+        <item>Incluso la luz visible (pantallas, focos) puede afectar la rosácea. Considera protectores solares con óxido de hierro para protección de espectro completo.</item>
+        <item>En la playa o la montaña, el reflejo de la arena y la nieve intensifica la radiación UV. Aumenta tu protección en estos ambientes.</item>
+        <item>La exposición solar acumulativa empeora la rosácea con el tiempo. La consistencia diaria en la protección solar es clave.</item>
+        <item>Elige protectores solares con textura fluida o en spray facial para facilitar la reaplicación durante el día.</item>
+        <item>Las ventanillas del auto no bloquean todos los rayos UV. Considera aplicar protector solar incluso para trayectos en coche.</item>
+        <item>Tras la aplicación del protector solar, espera 15 minutos antes de exponerte al sol para que el producto se fije correctamente.</item>
+        <item>Los protectores solares con color (tinted) ofrecen protección adicional contra la luz visible y ayudan a disimular el enrojecimiento.</item>
+        <item>En invierno, la radiación UV sigue presente. No bajes la guardia con tu protección solar en los meses fríos.</item>
+
+        <!-- Alimentación (16-30) -->
+        <item>Los alimentos picantes contienen capsaicina, que dilata los vasos sanguíneos y puede provocar brotes. Reduce su consumo gradualmente.</item>
+        <item>El alcohol, especialmente el vino tinto y las bebidas calientes, es uno de los desencadenantes más comunes de la rosácea.</item>
+        <item>Los alimentos ricos en omega-3 (salmón, sardinas, nueces) tienen propiedades antiinflamatorias que pueden beneficiar tu piel.</item>
+        <item>Las bebidas muy calientes (café, té) pueden desencadenar brotes. Deja que se enfríen un poco antes de consumirlas.</item>
+        <item>Los alimentos fermentados (yogur, kéfir, kimchi) aportan probióticos que fortalecen la salud intestinal y pueden mejorar la piel.</item>
+        <item>El chocolate, los cítricos y el tomate son desencadenantes comunes. Observa si afectan tu piel y ajusta tu dieta.</item>
+        <item>Mantente bien hidratado. Beber suficiente agua ayuda a mantener la barrera cutánea saludable y reduce la irritación.</item>
+        <item>Los suplementos de zinc han mostrado resultados prometedores en estudios sobre la reducción de la inflamación en rosácea.</item>
+        <item>Lleva un diario de alimentación para identificar qué alimentos desencadenan tus brotes. Cada persona es diferente.</item>
+        <item>Las frutas y verduras ricas en antioxidantes (arándanos, espinacas, brócoli) ayudan a combatir la inflamación sistémica.</item>
+        <item>El jengibre en pequeñas cantidades tiene propiedades antiinflamatorias, pero en exceso puede ser un irritante. Úsalo con moderación.</item>
+        <item>Reduce el consumo de azúcares refinados. La glucosa elevada en sangre puede aumentar la inflamación en todo el cuerpo.</item>
+        <item>Los productos lácteos pueden ser desencadenantes para algunas personas. Prueba alternativas vegetales y observa si hay mejoría.</item>
+        <item>El té verde contiene epigalocatequina galato (EGCG), un antioxidante con propiedades antiinflamatorias beneficiosas para la rosácea.</item>
+        <item>Las histaminas en alimentos como quesos curados, embutidos y vino pueden provocar vasodilatación y enrojecimiento facial.</item>
+
+        <!-- Rutina de Cuidado (31-50) -->
+        <item>Lava tu rostro con agua tibia, nunca caliente ni fría. Las temperaturas extremas dilatan los vasos sanguíneos.</item>
+        <item>Usa limpiadores sin jabón, sin fragancia y con pH balanceado (entre 5.0 y 5.5) para no alterar la barrera cutánea.</item>
+        <item>Seca tu rostro con toques suaves usando una toalla limpia y suave. Nunca frotar.</item>
+        <item>La niacinamida (vitamina B3) al 4-5% fortalece la barrera cutánea y reduce el enrojecimiento. Busca esta en tus productos.</item>
+        <item>El ácido azelaico al 15% es uno de los tratamientos tópicos más efectivos para la rosácea, con evidencia científica sólida.</item>
+        <item>Evita productos con alcohol, mentol, hamamelis, eucalipto o fragancia. Son irritantes comunes para pieles con rosácea.</item>
+        <item>Introduce productos nuevos de uno en uno y espera al menos 2 semanas para evaluar la reacción de tu piel.</item>
+        <item>La crema hidratante debe aplicarse antes del protector solar. Deja que cada capa se absorba completamente (2-3 minutos).</item>
+        <item>Los sérums con centella asiática (cica) son reparadores de la barrera cutánea y calmantes para la irritación.</item>
+        <item>El retinol puede ser útil para la rosácea, pero empieza con concentraciones muy bajas (0.01-0.03%) y frecuencia mínima.</item>
+        <item>Los productos con aloe vera puro tienen propiedades calmantes que pueden aliviar la irritación durante los brotes.</item>
+        <item>Evita exfoliantes físicos (scrubs). Si necesitas exfoliar, usa ácidos suaves como el ácido láctico en baja concentración.</item>
+        <item>La ceramida es un ingrediente clave para restaurar la barrera cutánea dañada. Búscala en tu crema hidratante.</item>
+        <item>Menos es más en rosácea. Una rutina simple de 3 pasos (limpieza, hidratación, protección solar) es más efectiva que 10 productos.</item>
+        <item>El agua micelar es una alternativa gentil para la limpieza facial. Elige fórmulas sin alcohol y sin fragancia.</item>
+        <item>Las mascarillas de avena coloidal pueden calmar la piel irritada durante un brote agudo de rosácea.</item>
+        <item>Cambia tu funda de almohada al menos 2 veces por semana. La acumulación de bacterias puede irritar tu piel sensible.</item>
+        <item>No toques tu rostro innecesariamente durante el día. Las manos transportan bacterias y aceites que pueden causar irritación.</item>
+        <item>El ácido hialurónico es seguro y beneficioso para la rosácea. Hidrata sin irritar y ayuda a la función de barrera.</item>
+        <item>Prueba compresas frías (nunca hielo directo) sobre la piel enrojecida durante brotes para aliviar temporalmente la inflamación.</item>
+
+        <!-- Estrés y Bienestar (51-65) -->
+        <item>El estrés es el segundo desencadenante más común de la rosácea. Las técnicas de respiración profunda pueden ayudar significativamente.</item>
+        <item>La meditación de 10 minutos diarios ha demostrado reducir los niveles de cortisol, una hormona que empeora la inflamación.</item>
+        <item>El yoga suave puede reducir el estrés sin sobrecalentar el cuerpo. Evita estilos intensos como Bikram o Power yoga.</item>
+        <item>Duerme entre 7 y 9 horas cada noche. La falta de sueño aumenta la inflamación y puede desencadenar brotes.</item>
+        <item>Los ejercicios de respiración 4-7-8 (inhala 4s, sostén 7s, exhala 8s) activan el sistema nervioso parasimpático y calman el cuerpo.</item>
+        <item>La ansiedad crónica está directamente relacionada con brotes de rosácea. Considera buscar apoyo profesional si la necesitas.</item>
+        <item>Las caminatas en la naturaleza combinan ejercicio suave con reducción del estrés, beneficiando doblemente tu piel.</item>
+        <item>Establece una rutina de sueño consistente: acuéstate y levántate a la misma hora todos los días, incluso fines de semana.</item>
+        <item>La aromaterapia con lavanda puede reducir el estrés, pero evita que los aceites esenciales toquen directamente tu piel.</item>
+        <item>Los baños calientes relajan pero empeoran la rosácea. Opta por duchas tibias y breves, especialmente en el rostro.</item>
+        <item>La risoterapia y las actividades sociales positivas reducen el cortisol y pueden tener efectos beneficiosos en la piel.</item>
+        <item>Llevar un diario emocional te ayuda a identificar patrones entre tus niveles de estrés y los brotes de rosácea.</item>
+        <item>La música relajante puede reducir la presión arterial y el ritmo cardíaco, disminuyendo la vasodilatación facial.</item>
+        <item>Desconéctate de las pantallas al menos 1 hora antes de dormir. La luz azul puede alterar tu ciclo de sueño y aumentar el estrés.</item>
+        <item>El contacto social positivo libera oxitocina, una hormona que contrarresta los efectos del estrés en tu cuerpo y piel.</item>
+
+        <!-- Ejercicio (66-75) -->
+        <item>El ejercicio intenso puede provocar brotes. Opta por actividades de baja a moderada intensidad como natación o caminata.</item>
+        <item>Mantén una toalla húmeda y fría cerca durante el ejercicio para refrescar tu rostro y reducir el enrojecimiento.</item>
+        <item>Ejercítate en ambientes frescos y bien ventilados. Evita hacer deporte bajo el sol directo o en espacios cerrados muy calurosos.</item>
+        <item>Hidrata tu piel antes y después del ejercicio. El sudor puede ser irritante, así que lava tu rostro suavemente al terminar.</item>
+        <item>Los ejercicios en el agua (natación, aquagym) son ideales para la rosácea porque mantienen el cuerpo fresco durante la actividad.</item>
+        <item>Divide tus sesiones de ejercicio en intervalos más cortos con descansos para evitar el sobrecalentamiento.</item>
+        <item>Bebe agua fría durante el ejercicio para ayudar a regular tu temperatura corporal y reducir el enrojecimiento.</item>
+        <item>El pilates y el tai chi son excelentes opciones de ejercicio que combinan movimiento suave con técnicas de respiración.</item>
+        <item>Evita hacer ejercicio justo después de comer alimentos picantes o de beber alcohol, ya que ambos potencian el enrojecimiento.</item>
+        <item>Usa ropa deportiva transpirable y de colores claros para ayudar a regular la temperatura corporal durante el ejercicio.</item>
+
+        <!-- Clima y Ambiente (76-90) -->
+        <item>El viento frío reseca y daña la barrera cutánea. Usa una bufanda suave para proteger tu rostro en días ventosos.</item>
+        <item>La calefacción central reseca el aire interior. Usa un humidificador para mantener la humedad relativa entre 40-60%.</item>
+        <item>Los cambios bruscos de temperatura (interior caliente a exterior frío) son un desencadenante importante. Transiciona gradualmente.</item>
+        <item>En verano, busca sombra siempre que sea posible y usa un abanico o ventilador portátil para mantenerte fresco.</item>
+        <item>La contaminación del aire puede empeorar la rosácea. Considera usar protector solar con antioxidantes en zonas urbanas.</item>
+        <item>En ambientes secos (aviones, oficinas con aire acondicionado), aplica bruma facial hidratante para mantener la piel humectada.</item>
+        <item>Los climas tropicales húmedos pueden agravar la rosácea por el calor. Planifica viajes considerando el impacto en tu piel.</item>
+        <item>El agua muy dura (con alto contenido mineral) puede irritar la piel sensible. Considera un filtro de ducha.</item>
+        <item>En invierno, la combinación de frío exterior y calefacción interior es especialmente agresiva. Refuerza tu hidratación en esta época.</item>
+        <item>Las saunas, jacuzzis y baños turcos son desencadenantes potentes de brotes. Es mejor evitarlos si tienes rosácea activa.</item>
+        <item>La altitud elevada significa mayor radiación UV y aire más seco. Aumenta tu protección solar y hidratación en montaña.</item>
+        <item>Mantén la temperatura de tu hogar entre 18-21°C. Las temperaturas interiores elevadas pueden provocar enrojecimiento constante.</item>
+        <item>Si cocinas, el vapor y calor directo del horno o la estufa pueden provocar brotes. Usa el extractor y ventila la cocina.</item>
+        <item>Las chimeneas y estufas de leña irradian calor directo al rostro. Mantén una distancia prudente si las utilizas.</item>
+        <item>En días de alta contaminación, limpia tu rostro con mayor frecuencia para eliminar partículas que pueden irritar la piel.</item>
+
+        <!-- Maquillaje (91-100) -->
+        <item>El maquillaje con tono verdoso corrige visualmente el enrojecimiento. Aplícalo antes de la base en las zonas más rojas.</item>
+        <item>Elige maquillaje mineral sin fragancia, que es menos irritante y ofrece cierta protección solar adicional.</item>
+        <item>Siempre retira completamente el maquillaje antes de dormir usando un desmaquillante suave sin alcohol.</item>
+        <item>Las brochas y esponjas de maquillaje deben lavarse semanalmente para evitar la acumulación de bacterias.</item>
+        <item>Las bases de maquillaje con acabado mate pueden ayudar a disimular el brillo asociado al enrojecimiento.</item>
+        <item>Evita maquillaje waterproof en el uso diario, ya que requiere desmaquillantes más agresivos para su remoción.</item>
+        <item>Las CC creams (Color Correcting) son una alternativa ligera que corrige el tono, hidrata y protege del sol en un solo paso.</item>
+        <item>Antes de aplicar maquillaje, asegúrate de que tu hidratante y protector solar estén completamente absorbidos.</item>
+        <item>Si notas irritación con un maquillaje nuevo, retíralo inmediatamente y vuelve a tus productos habituales.</item>
+        <item>Los polvos minerales sueltos son una opción ligera para fijar el maquillaje sin obstruir los poros ni irritar la piel.</item>
+
+        <!-- Consejos Médicos y Generales (101-110) -->
+        <item>Visita a un dermatólogo al menos una vez al año para evaluar la evolución de tu rosácea y ajustar el tratamiento.</item>
+        <item>Toma fotos regulares de tu piel para documentar cambios y compartirlas con tu dermatólogo en las consultas.</item>
+        <item>Los ácaros Demodex están relacionados con la rosácea. Tu dermatólogo puede evaluar si este factor está contribuyendo a tus brotes.</item>
+        <item>Existen tratamientos con láser vascular (IPL, PDL) que pueden reducir significativamente el enrojecimiento persistente y los vasos visibles.</item>
+        <item>La rosácea tiene componente genético. Si tienes familiares con esta condición, comparte esta información con tu dermatólogo.</item>
+        <item>No te automediques con cremas con corticosteroides. Pueden empeorar dramáticamente la rosácea a largo plazo (rosácea esteroide).</item>
+        <item>La rosácea no es contagiosa. No tiene relación con la higiene personal. Es una condición inflamatoria crónica manejable.</item>
+        <item>Conoce los 4 subtipos de rosácea: eritematotelangiectásica, papulopustulosa, fimatosa y ocular. Cada una requiere diferente manejo.</item>
+        <item>Si experimentas ardor, picazón o sensación de arena en los ojos, podrías tener rosácea ocular. Consulta con un oftalmólogo.</item>
+        <item>La paciencia es clave. Los tratamientos para rosácea suelen tardar entre 4 y 12 semanas en mostrar resultados visibles.</item>
+    </string-array>
+</resources>

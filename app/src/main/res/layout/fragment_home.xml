@@ -14,12 +14,14 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- Greeting -->
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_greeting"
             android:textAppearance="@style/TextAppearance.IADerm.Headline"
+            android:textSize="28sp"
             android:layout_marginBottom="4dp" />
 
         <TextView
@@ -36,7 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.IADerm.Card"
-            android:layout_marginBottom="24dp">
+            app:cardBackgroundColor="@color/primary_container"
+            app:strokeWidth="0dp"
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,10 +65,18 @@
 
                     <TextView
                         android:id="@+id/tvLastAnalysisLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_last_analysis"
+                        android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_primary_container" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/home_last_analysis"
-                        android:textAppearance="@style/TextAppearance.IADerm.Label" />
+                        android:text="🔬"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <TextView
@@ -72,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
+                    android:textColor="@color/on_primary_container"
                     tools:text="Hace 3 días — Leve" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -80,16 +93,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:progress="42"
-                    app:trackThickness="8dp"
-                    app:trackCornerRadius="4dp"
+                    app:trackThickness="10dp"
+                    app:trackCornerRadius="5dp"
                     app:indicatorColor="@color/primary"
-                    app:trackColor="@color/surface_variant" />
+                    app:trackColor="@color/on_primary" />
 
                 <TextView
                     android:id="@+id/tvScoreLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.IADerm.Caption"
+                    android:textColor="@color/on_primary_container"
                     android:layout_marginTop="8dp"
                     tools:text="Índice de Rojez: 42/100" />
 
@@ -104,18 +118,21 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Quick Actions Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_quick_actions"
             android:textAppearance="@style/TextAppearance.IADerm.Label"
-            android:layout_marginBottom="16dp" />
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
 
+        <!-- Quick Action Cards -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="20dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHistory"
@@ -124,6 +141,7 @@
                 android:layout_weight="1"
                 style="@style/Widget.IADerm.Card"
                 app:cardBackgroundColor="@color/secondary_container"
+                app:strokeWidth="0dp"
                 android:layout_marginEnd="8dp">
 
                 <LinearLayout
@@ -131,20 +149,30 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📊"
-                        android:textSize="24sp" />
+                        android:textSize="28sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/nav_history"
                         android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_secondary_container"
                         android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver tu evolución"
+                        android:textSize="11sp"
+                        android:textColor="@color/on_secondary_container"
+                        android:alpha="0.7"
+                        android:layout_marginTop="4dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -155,6 +183,7 @@
                 android:layout_weight="1"
                 style="@style/Widget.IADerm.Card"
                 app:cardBackgroundColor="@color/tertiary_container"
+                app:strokeWidth="0dp"
                 android:layout_marginStart="8dp">
 
                 <LinearLayout
@@ -162,32 +191,43 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📝"
-                        android:textSize="24sp" />
+                        android:textSize="28sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/nav_triggers"
                         android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_tertiary_container"
                         android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registrar factores"
+                        android:textSize="11sp"
+                        android:textColor="@color/on_tertiary_container"
+                        android:alpha="0.7"
+                        android:layout_marginTop="4dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Tip -->
+        <!-- Tip of the Day Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.IADerm.Card"
             app:cardBackgroundColor="@color/surface_variant"
-            android:layout_marginBottom="24dp">
+            app:strokeWidth="0dp"
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -195,12 +235,38 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_tip_title"
+                        android:textAppearance="@style/TextAppearance.IADerm.Label"
+                        android:textColor="@color/on_surface_variant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Toca para otro →"
+                        android:textSize="11sp"
+                        android:textColor="@color/on_surface_variant"
+                        android:alpha="0.6" />
+                </LinearLayout>
+
                 <TextView
+                    android:id="@+id/tvTipCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_tip_title"
-                    android:textAppearance="@style/TextAppearance.IADerm.Label"
-                    android:textColor="@color/on_surface_variant" />
+                    android:textSize="12sp"
+                    android:textColor="@color/primary"
+                    android:layout_marginBottom="8dp"
+                    tools:text="☀️ Protección Solar" />
 
                 <TextView
                     android:id="@+id/tvTipContent"
@@ -208,15 +274,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/home_tip_content"
                     android:textAppearance="@style/TextAppearance.IADerm.BodySmall"
-                    android:layout_marginTop="8dp" />
+                    android:lineSpacingExtra="4dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Disclaimer -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/disclaimer_short"
             android:textAppearance="@style/TextAppearance.IADerm.Disclaimer"
-            android:gravity="center" />
+            android:gravity="center"
+            android:alpha="0.6" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

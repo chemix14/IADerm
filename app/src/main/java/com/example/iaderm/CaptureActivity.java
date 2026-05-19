@@ -31,6 +31,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import android.os.CountDownTimer;
+
 public class CaptureActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_PERMISSION = 200;
@@ -65,6 +67,10 @@ public class CaptureActivity extends AppCompatActivity {
     // ── Luminosity tracking ──
     private long lastLuminosityCheck = 0;
     private static final long LUMINOSITY_CHECK_INTERVAL = 500; // ms
+
+    // ── Auto-capture ──
+    private CountDownTimer autoCaptureTimer;
+    private boolean hasAutoCaptured = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -380,6 +386,12 @@ public class CaptureActivity extends AppCompatActivity {
     }
 
     private void applyUiState(CaptureUiState newState) {
+        // Cancel any pending auto-capture if we leave READY state
+        if (newState != CaptureUiState.READY && autoCaptureTimer != null) {
+            autoCaptureTimer.cancel();
+            autoCaptureTimer = null;
+        }
+
         switch (newState) {
             case READY:
                 faceGuideView.setState(FaceGuideView.STATE_READY);
@@ -396,6 +408,30 @@ public class CaptureActivity extends AppCompatActivity {
                                         .start())
                         .start();
                 scanLineView.stopScan();
+
+                // Start auto-capture countdown (2 seconds)
+                if (!hasAutoCaptured && autoCaptureTimer == null) {
+                    autoCaptureTimer = new CountDownTimer(2000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            int secondsLeft = (int) (millisUntilFinished / 1000) + 1;
+                            tvInstrucciones.setText("Capturando en " + secondsLeft + "...");
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            autoCaptureTimer = null;
+                            // Verify still in READY state before capturing
+                            if (Boolean.TRUE.equals(viewModel.getIsLightOk().getValue()) &&
+                                Boolean.TRUE.equals(viewModel.getIsDistanceOk().getValue()) &&
+                                Boolean.TRUE.equals(viewModel.getIsStabilityOk().getValue()) &&
+                                !hasAutoCaptured) {
+                                hasAutoCaptured = true;
+                                performCapture();
+                            }
+                        }
+                    }.start();
+                }
                 break;
             case ADJUST_LIGHT:
                 faceGuideView.setState(FaceGuideView.STATE_ADJUSTING);
