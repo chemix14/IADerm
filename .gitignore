@@ -20,6 +20,7 @@ datasets_remotos/
 modelo_final_caras/
 model.onnx.data
 temp_tflite_output/
+modelo_caras_actualizacion/
 
 # IDE/Editor/Local files
 .vscode/

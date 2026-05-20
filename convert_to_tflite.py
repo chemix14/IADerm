@@ -5,7 +5,7 @@ import numpy as np
 from transformers import AutoModelForImageClassification
 
 # Configuración
-MODEL_PATH = "./modelo_final_caras"
+MODEL_PATH = "./modelo_caras_actualizacion"
 TFLITE_PATH = "./app/src/main/assets/dermatology_model.tflite"
 ONNX_PATH = "model.onnx"
 TEMP_TFLITE_DIR = "temp_tflite_output"
@@ -16,7 +16,7 @@ model.eval()
 
 # 1. Exportar a ONNX
 print("Exportando a ONNX...")
-dummy_input = torch.randn(1, 3, 224, 224)
+dummy_input = torch.randn(1, 3, 256, 256)
 torch.onnx.export(
     model, 
     dummy_input, 
@@ -40,7 +40,7 @@ def patched_load(*args, **kwargs):
         # 2. Si falla (por la descarga corrupta de internet que vimos antes), 
         # atrapamos el error y le lanzamos la imagen falsa para que siga.
         print(f"    [!] Interceptado error de onnx2tf: {e}. Usando imagen falsa...")
-        return np.zeros((1, 3, 224, 224), dtype=np.float32)
+        return np.zeros((1, 3, 256, 256), dtype=np.float32)
 
 np.load = patched_load
 

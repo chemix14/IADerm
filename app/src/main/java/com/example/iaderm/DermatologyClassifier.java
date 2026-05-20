@@ -29,19 +29,16 @@ public class DermatologyClassifier {
     private static final String MODEL_FILE = "dermatology_model.tflite";
     
     private Interpreter interpreter;
-    private final int inputSize = 224; // MobileViT default
+    private final int inputSize = 256; // MobileViT — modelo actualizado
     
     // Pre-processing constants for MobileViT (ImageNet normalization)
     // Formula: (pixel - mean * 255) / (std * 255)
     private static final float IMAGE_MEAN = 123.675f; // 0.485 * 255
     private static final float IMAGE_STD = 58.395f;   // 0.229 * 255
 
-    // Classes sorted alphabetically as in the training script
+    // Clases del modelo actualizado (binario: rosácea vs no rosácea)
     private final String[] PADECIMIENTOS = {
-        "Acné", "Cloasma", "Dermatitis seborreica", "Eccema", "Eritema", 
-        "Hiperpigmentación", "Lentigos", "Manchas solares", "Melasma", 
-        "Nevus (lunares)", "Piel sana", "Psoriasis", "Queratosis actínica", 
-        "Rosácea", "Vitíligo"
+        "No Rosácea", "Rosácea"
     };
 
     public static class ClassificationResult {
@@ -90,45 +87,25 @@ public class DermatologyClassifier {
         // 3. Run inference
         interpreter.run(tensorImage.getBuffer(), outputBuffer.getBuffer().rewind());
 
-        // 4. Process results
+        // 4. Process results — Modelo binario: índice 0 = no_rosacea, índice 1 = rosacea
         float[] results = outputBuffer.getFloatArray();
-        
-        // Apply Softmax if the model outputs logits (values outside [0,1])
         float[] probabilities = softmax(results);
         Log.d(TAG, "Probabilities: " + Arrays.toString(probabilities));
 
-        // Sort indices by probability
-        Integer[] indices = new Integer[PADECIMIENTOS.length];
-        for (int i = 0; i < indices.length; i++) indices[i] = i;
-        Arrays.sort(indices, (a, b) -> Float.compare(probabilities[b], probabilities[a]));
-
-        // Focus purely on Rosacea (index 13)
-        int rosaceaIndex = 13;
+        int rosaceaIndex = 1;
+        int noRosaceaIndex = 0;
         int rosaceaScore = (int) (probabilities[rosaceaIndex] * 100);
 
-        // Check if there is another condition with high probability (>40%)
-        int highestOtherIndex = -1;
-        float highestOtherProb = 0f;
-        for (int i = 0; i < probabilities.length; i++) {
-            if (i == 13 || i == 10) continue; // Skip Rosacea and Healthy Skin
-            if (probabilities[i] > highestOtherProb) {
-                highestOtherProb = probabilities[i];
-                highestOtherIndex = i;
-            }
-        }
-
         StringBuilder top3Builder = new StringBuilder();
-        if (highestOtherProb >= 0.40f) {
-            top3Builder.append("ALERTA: Hemos detectado posibles indicios de ").append(PADECIMIENTOS[highestOtherIndex])
-                       .append(" (Seguridad: ").append((int)(highestOtherProb * 100))
-                       .append("%). Consulta a un dermatólogo para obtener un diagnóstico certero.;");
-        }
-
-        for (int i = 0; i < 3; i++) {
-            int idx = indices[i];
-            top3Builder.append(PADECIMIENTOS[idx]).append(":")
-                       .append((int) (probabilities[idx] * 100));
-            if (i < 2) top3Builder.append(";");
+        // Mostrar ambas clases ordenadas por probabilidad
+        if (probabilities[rosaceaIndex] >= probabilities[noRosaceaIndex]) {
+            top3Builder.append(PADECIMIENTOS[rosaceaIndex]).append(":").append((int)(probabilities[rosaceaIndex] * 100));
+            top3Builder.append(";");
+            top3Builder.append(PADECIMIENTOS[noRosaceaIndex]).append(":").append((int)(probabilities[noRosaceaIndex] * 100));
+        } else {
+            top3Builder.append(PADECIMIENTOS[noRosaceaIndex]).append(":").append((int)(probabilities[noRosaceaIndex] * 100));
+            top3Builder.append(";");
+            top3Builder.append(PADECIMIENTOS[rosaceaIndex]).append(":").append((int)(probabilities[rosaceaIndex] * 100));
         }
 
         return new ClassificationResult("Rosácea", rosaceaScore, top3Builder.toString());
